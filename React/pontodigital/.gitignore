@@ -3,7 +3,7 @@
 
 # to share project
 node_modules/
-package.json
+/package.json
 
 
 # testing
