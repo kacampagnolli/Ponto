@@ -3,7 +3,7 @@ import FormButton from './utils/FormButton.js'
 import FormInput from './utils/FormInput.js'
 import Logo from './utils/Logo.js'
 
-class LoginBox extends Component {
+class Login extends Component {
     render() {
         return (<div className="mdl-layout mdl-js-layout mdl-color--grey-100">
             <main className="mdl-layout__content">
@@ -25,4 +25,4 @@ class LoginBox extends Component {
     }
 }
 
-export default LoginBox;
+export default Login;

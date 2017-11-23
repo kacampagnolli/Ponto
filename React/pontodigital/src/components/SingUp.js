@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FormInput from './utils/FormInput.js'
-import './teste.css';
+import 'statics/css/teste.css';
 
 class SingUp extends Component{
     render(){
