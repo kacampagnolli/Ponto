@@ -11,8 +11,8 @@ class LoginBox extends Component {
                     <Logo/>
                     <div className="mdl-card__supporting-text">
                         <form action="#">
-                            <FormInput textInput='Usuário' />
-                            <FormInput textInput='Senha' />
+                            <FormInput textInput='text' />
+                            <FormInput textInput='password' />
                         </form>
                     </div>
                     <FormButton textButton='Login' />

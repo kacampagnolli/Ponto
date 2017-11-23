@@ -11,14 +11,15 @@ import './mdl/fontsgoogle.css';
 //COMPONENTS
 import LoginBox from './components/LoginBox.js'
 import MenuBox from './components/MenuBox.js'
-
+import SingUp from './components/SingUp.js'
 
 
 ReactDOM.render(
 (<Router>
     <div>
-    <Route exact path="/" component={LoginBox}/>
-    <Route exact path="/menu" component={MenuBox}/>
+        <Route exact path="/" component={LoginBox}/>
+        <Route exact path="/menu" component={MenuBox}/>
+        <Route exact path="/usuario" componente={SingUp}/>
     </div>
 </Router>
 ), 

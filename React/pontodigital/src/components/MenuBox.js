@@ -7,7 +7,7 @@ class MenuBox extends Component{
         return(
         //<!-- The drawer is always open in large screens. The header is always shown,
         //even in small screens. 
-        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+        <div className="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
            <TopMenu />
            <SideMenu />
         </div>

@@ -4,15 +4,15 @@ class TopMenu extends Component{
     render(){
         return(
 
-        <header  class="mdl-layout__header">
-                        <div class="mdl-layout__header-row">
-                        <div class="mdl-layout-spacer"></div>
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
-                            <label class="mdl-button mdl-js-button mdl-button--icon" for="fixed-header-drawer-exp">
-                                <i class="material-icons">search</i>
+        <header  className="mdl-layout__header">
+                        <div className="mdl-layout__header-row">
+                        <div className="mdl-layout-spacer"></div>
+                        <div className="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+                            <label className="mdl-button mdl-js-button mdl-button--icon" htmlFor="fixed-header-drawer-exp">
+                                <i className="material-icons">search</i>
                             </label>
-                            <div class="mdl-textfield__expandable-holder">
-                                <input class="mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp">
+                            <div className="mdl-textfield__expandable-holder">
+                                <input className="mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp">
                                 </input>
                             </div>
                         </div>
