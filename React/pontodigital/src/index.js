@@ -19,7 +19,7 @@ ReactDOM.render(
     <div>
         <Route exact path="/" component={Login}/>
         <Route exact path="/menu" component={MenuBox}/>
-        <Route exact path="/usuario" componente={SingUp}/>
+        <Route exact path="/usuario" component={SingUp}/>
     </div>
 </Router>
 ), 

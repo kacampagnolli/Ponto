@@ -24,13 +24,13 @@
   
   
   .mdl-button {
-    outline: red solid 5px; 
+  /* outline: red solid 5px; */
     margin-left: 10px ;
     
   }
   .demo-card-wide {
     height: 200px;
-    outline: limegreen 10px solid;
+   /* outline: limegreen 10px solid;*/
   }
   
   
@@ -54,9 +54,9 @@
   #mycard {
     height: 600px;
     width:100%;
-   display:flex;
+    display:flex;
     flex-direction: row;
-    outline: red solid 10px;
+    /* outline: red solid 10px;*/
     justify-content: center;
     align-items: center;
   }
