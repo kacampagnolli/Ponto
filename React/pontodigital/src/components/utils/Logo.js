@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-
+import img from 'statics/logo_autbank.jpg';
 
 class Logo extends Component {
     render() {
-      return (
-        <img src='./static/logo_autbank.jpg' alt="aaa" height="100" width="300"/>
-
+      return (<div>
+        <img src={img} alt="AutBank" height="100" width="300"/>
+        </div>
     );
 }
 }
