@@ -1,25 +1,28 @@
 import React, { Component } from 'react';
 import FormButton from './utils/FormButton.js'
+import FormInput from './utils/FormInput.js'
+import Logo from './utils/Logo.js'
 
 class LoginBox extends Component {
     render() {
-      return (<div>
-                <form>
-                    <div class="mdl-textfield mdl-js-textfield">
-                        <input class="mdl-textfield__input" type="text" pattern="[0-9]*" id="phone"/>
-                        <label class="mdl-textfield__label" for="phone">Phone</label>
-                        <span class="mdl-textfield__error">Digits only</span>
-                    </div>
-                    <div class="mdl-textfield mdl-js-textfield">
-                        <input class="mdl-textfield__input" type="text" pattern="[0-9]*" id="phone"/>
-                        <label class="mdl-textfield__label" for="phone">Phone</label>
-                        <span class="mdl-textfield__error">Digits only</span>
+        return (<div className="mdl-layout mdl-js-layout mdl-color--grey-100">
+            <main className="mdl-layout__content">
+                <div className="mdl-card mdl-shadow--6dp">
+                    <Logo/>
+                    <div className="mdl-card__supporting-text">
+                        <form action="#">
+                            <FormInput textInput='Usuário' />
+                            <FormInput textInput='Senha' />
+                        </form>
                     </div>
                     <FormButton textButton='Login' />
-                </form>
                 </div>
-    );
-}
+            </main>
+        </div>
+
+
+        );
+    }
 }
 
 export default LoginBox;
