@@ -17,7 +17,7 @@ import SingUp from './components/SingUp.js'
 ReactDOM.render(
 (<Router>
     <div>
-        <Route exact path="/" component={Login}/>
+        <Route exact path="/" component={Login }/>
         <Route exact path="/menu" component={MenuBox}/>
         <Route exact path="/usuario" component={SingUp}/>
     </div>
