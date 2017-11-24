@@ -4,7 +4,7 @@ import FormInput from './utils/FormInput.js'
 import Logo from './utils/Logo.js'
 import 'statics/css/Logo.css'
 
-class LoginBox extends Component {
+class Login extends Component {
     render() {
         return (
            
@@ -31,4 +31,4 @@ class LoginBox extends Component {
     }
 }
 
-export default LoginBox;
+export default Login;
