@@ -12,7 +12,7 @@ import 'statics/mdl/fontsgoogle.css';
 import Login from './components/Login.js'
 import MenuBox from './components/MenuBox.js'
 import SingUp from './components/SingUp.js'
-
+import Category from './components/Category.js'
 
 ReactDOM.render(
 (<Router>
@@ -20,6 +20,7 @@ ReactDOM.render(
         <Route exact path="/" component={Login }/>
         <Route exact path="/menu" component={MenuBox}/>
         <Route exact path="/usuario" component={SingUp}/>
+        <Route exact path="/categoria" component={Category}/>
     </div>
 </Router>
 ), 

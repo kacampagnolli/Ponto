@@ -1,0 +1,16 @@
+.demo-card-wide > .mdl-card__title {
+    color: #fff;
+    background-color:#03A9F4;
+    display: flex;           /* establish flex container */
+    align-items: center;
+    justify-content: center;
+  }
+  
+.mdl-card--border{
+    display: flex;           /* establish flex container */
+    align-items: center;
+    justify-content: center;  
+}
+.mdl-card__supporting-text{
+    height:300px;
+}
