@@ -5,9 +5,9 @@ import {Link} from 'react-router-dom'
 class LinkMenu extends Component{
     render(){
         return(
-        <Link class="mdl-navigation__link" to={this.props.hrefLink}>
-             <span class="mdl-list__item-primary-content">
-                <i class="material-icons mdl-list__item-icon">{this.props.iconLink}</i>
+        <Link className="mdl-navigation__link" to={this.props.hrefLink}>
+             <span className="mdl-list__item-primary-content">
+                <i className="material-icons mdl-list__item-icon">{this.props.iconLink}</i>
                     {this.props.valueLink}
             </span>
         </Link>

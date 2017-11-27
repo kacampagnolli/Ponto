@@ -3,7 +3,17 @@ import TopMenu from './TopMenu.js'
 import SideMenu from './SideMenu.js'
 
 class MenuBox extends Component{
+    componentDidMount(){
+        window.componentHandler.upgradeDom();
+    }
+
+    componentDidUpdate(){
+        window.componentHandler.upgradeDom();
+    }
     render(){
+
+        
+    
         return(
         //<!-- The drawer is always open in large screens. The header is always shown,
         //even in small screens. 

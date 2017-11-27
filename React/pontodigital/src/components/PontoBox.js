@@ -7,6 +7,9 @@ import SingUp from './SingUp.js'
 import Category from './Category.js'
 
 class PontoBox extends Component{
+
+    
+
     render(){
         return(
             <Switch>
