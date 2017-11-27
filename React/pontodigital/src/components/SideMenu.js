@@ -6,10 +6,9 @@ class SideMenu extends Component{
             <div className="mdl-layout__drawer">
                 <span className="mdl-layout-title">Autbank</span>
                 <nav className="mdl-navigation">
-                    <LinkMenu hrefLink="" valueLink="Link" iconLink="person"/>
-                    <LinkMenu hrefLink="" valueLink="Link" iconLink="settings"/>
-                    <LinkMenu hrefLink="" valueLink="Link" iconLink="person"/>
-                    <LinkMenu hrefLink="" valueLink="Link" iconLink="person"/>
+                <LinkMenu hrefLink="" valueLink="calendário" iconLink="person"/>
+                <LinkMenu hrefLink="/ponto/configuracoes/cadastrousuario" valueLink="Resumos" iconLink="person"/>
+                <LinkMenu hrefLink="/ponto/configuracoes/categorias" valueLink="Configurações" iconLink="settings"/>
                 </nav>  
             </div>
         );

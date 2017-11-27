@@ -13,4 +13,25 @@
 }
 .mdl-card__supporting-text{
     height:300px;
+    
+}
+
+.mdl-textfield__label{
+    font-size: 12px;
+}
+
+.mdl-menu{
+
+}
+
+.mdl-menu__item{
+    height:30px;
+    font-size: 12px;
+    display: flex;           /* establish flex container */
+    align-items: center;
+ 
+}
+
+.getmdl-select__fix-height  {
+    max-height: 100px !important;
 }
