@@ -1,24 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter,Switch,Route} from 'react-router-dom'
-import registerServiceWorker from './registerServiceWorker';
-
-//CSS
-import 'statics/mdl/material.min.css';
-import 'statics/mdl/material.min.js';
-import 'statics/mdl/fontsgoogle.css';
+import {cyan500} from 'material-ui/styles/colors';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 //COMPONENTS
 import Login from './components/Login.js'
 import PontoBox from './components/PontoBox.js'
 
+const muiTheme = getMuiTheme({
+  palette: {
+    textColor: cyan500,
+  },
+  appBar: {
+    height: 50,
+  },
+});
+
+
 ReactDOM.render(
-(<BrowserRouter>
+(<MuiThemeProvider> muiTheme={muiTheme}>
+<BrowserRouter>
     <Switch>
         <Route exact path="/" component={Login}/>
         <Route path="/ponto" component={PontoBox}/>
     </Switch>
 </BrowserRouter>
+</MuiThemeProvider>
 ), 
 document.getElementById('root'));
-registerServiceWorker();
