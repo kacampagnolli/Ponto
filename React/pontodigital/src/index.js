@@ -9,24 +9,30 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Login from './components/Login.js'
 import PontoBox from './components/PontoBox.js'
 
+
 const muiTheme = getMuiTheme({
-  palette: {
-    textColor: cyan500,
-  },
-  appBar: {
-    height: 50,
-  },
-});
+    palette: {
+      textColor: cyan500,
+    },
+    appBar: {
+      height: 50,
+    },
+  });
 
 
-ReactDOM.render(
-(<MuiThemeProvider> muiTheme={muiTheme}>
-<BrowserRouter>
+const App = () => (
+    <BrowserRouter>
     <Switch>
         <Route exact path="/" component={Login}/>
         <Route path="/ponto" component={PontoBox}/>
     </Switch>
 </BrowserRouter>
+  );
+  
+
+ReactDOM.render(
+(<MuiThemeProvider muiTheme={muiTheme}>
+    <App/>
 </MuiThemeProvider>
 ), 
 document.getElementById('root'));
