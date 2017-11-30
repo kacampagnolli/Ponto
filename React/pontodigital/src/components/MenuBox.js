@@ -175,6 +175,9 @@ class  MenuListSelectable extends Component{
       super()
       this.state = {itemConfiguracoesOpen : false}
     }
+    changeItemConfiguracoesOpen(){
+      this.setState( {itemConfiguracoesOpen : !this.state.itemConfiguracoesOpen});
+      }
     render(){
       return(
   <SelectableList defaultValue={1}>
@@ -200,13 +203,15 @@ class  MenuListSelectable extends Component{
       <ListItem
         primaryText="Configurações"
         leftIcon={<SettingsIcon/>}
-        //onClick={ () => { return('')}}
-        //open={this.state.itemConfiguracoesOpen}
+        onClick={this.changeItemConfiguracoesOpen.bind(this)}
+        open={this.state.itemConfiguracoesOpen}
         isKeyboardFocused={true}
+        rightToggle={
+          <NotificationsIcon/>
+        }
         nestedItems={[
             <ListItem
               value={4}
-              
               leftIcon={<GroupIcon/>}
               primaryText="Usuários"
             />,

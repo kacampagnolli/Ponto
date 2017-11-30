@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Switch,Route} from 'react-router-dom'
+import {Switch,Route,Router} from 'react-router-dom'
 
 import SingUp from './SingUp.js'
 import Category from './Category.js'
@@ -32,13 +32,13 @@ class PontoBox extends Component{
 
     render(){
         return(
-            <Switch>
-                
+            <Router history={this.props.history}>
+                <div>
                 <MenuBox {...this.state} {...this.props} updateOpenTrue={this.updateOpenTrue}/>
-                <Route exact path={this.props.match.url + "/configuracoes/cadastrousuario"} component={SingUp}/>
+                <Route  path={this.props.match.url + "/configuracoes/cadastrousuario"} component={SingUp}/>
                 <Route exact path={this.props.match.url + "/configuracoes/categorias"} component={Category}/>
-          
-            </Switch> 
+            </div>
+            </Router> 
         );
     }
 }
