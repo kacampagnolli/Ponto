@@ -39,6 +39,7 @@ const styles = {
 class FormCard extends Component {
     constructor(props) {
         super(props);
+        console.log("a")
         this.state = {value: 1};
     }
 

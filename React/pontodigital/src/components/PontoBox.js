@@ -34,7 +34,7 @@ class PontoBox extends Component{
         return(
             <Switch>
                 
-                <MenuBox {...this.state} updateOpenTrue={this.updateOpenTrue}/>
+                <MenuBox {...this.state} {...this.props} updateOpenTrue={this.updateOpenTrue}/>
                 <Route exact path={this.props.match.url + "/configuracoes/cadastrousuario"} component={SingUp}/>
                 <Route exact path={this.props.match.url + "/configuracoes/categorias"} component={Category}/>
           
