@@ -28,6 +28,8 @@ const styles = {
     },
     customWidth:{
         width:'200px',
+        padding:'0',
+        margin:'0',
     },
     formCard:{
         width:'100%',
@@ -68,25 +70,6 @@ class FormCard extends Component {
                     fullWidth={true}
                     type="text"
                 />
-                <DropDownMenu value={this.state.value}
-                    onChange={this.handleChange}
-                    style={styles.customWidth}
-                    autoWidth={false}
-                    anchorOrigin={{ vertical: 'top', horizontal: 'left',}}
-                >
-                    <MenuItem value={1} primaryText="Custom width" />
-                    <MenuItem value={2} primaryText="Every Night" />
-                    <MenuItem value={3} primaryText="Weeknights" />
-                    <MenuItem value={4} primaryText="Weekends" />
-                    <MenuItem value={5} primaryText="Weekly" />
-                </DropDownMenu>
-                <div style={styles.RaisedButton}>
-                <RaisedButton label="Login"
-                    type="submit" 
-                    backgroundColor="#3F51B5"
-                    labelColor="#FFFFFF"
-                />
-                </div>
             </form>
         );
     };
@@ -121,7 +104,6 @@ const SingUpCard = () =>{
     return(
         <div style={styles.div}>
             <Card style={styles.Card}>
-                <CardTitle style={styles.CardTitle} title="Cadasto de Usuário" titleColor="#FFFFFF"/>
                 <CardText>
                     <FormCard />
                 </CardText>
