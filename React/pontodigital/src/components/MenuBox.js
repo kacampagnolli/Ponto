@@ -82,7 +82,7 @@ class  MenuBox extends Component{
             AppBar: {
                 display: 'flex',
                 width: 'auto',
-                margin: this.props.open?'0 0 0 253px':'0 0 0 0',
+                margin: this.props.openMenu?'0 0 0 253px':'0 0 0 0',
                 paddingLeft: 5
           },
         }
@@ -106,10 +106,10 @@ class  MenuBox extends Component{
                         {NotificationsType }
                     </IconButton>
                   </Badge>}
-                showMenuIconButton={!this.props.open}
+                showMenuIconButton={!this.props.openMenu}
                 style={styless.AppBar}
                 
-                onLeftIconButtonTouchTap={this.props.updateOpenTrue}
+                onLeftIconButtonTouchTap={this.props.updateOpenMenuTrue}
                 
                 onRightIconButtonTouchTap={this.logOut}             
                 iconElementRight={
@@ -123,7 +123,7 @@ class  MenuBox extends Component{
                     </IconButton>}
                 />
                 
-            <Drawer open={this.props.open}>
+            <Drawer open={this.props.openMenu}>
             <MenuListSelectable />
             </Drawer>
 
@@ -207,7 +207,7 @@ class  MenuListSelectable extends Component{
         open={this.state.itemConfiguracoesOpen}
         isKeyboardFocused={true}
         rightToggle={
-          <NotificationsIcon/>
+          <NotificationsIcon onClick={this.changeItemConfiguracoesOpen.bind(this)}/>
         }
         nestedItems={[
             <ListItem
