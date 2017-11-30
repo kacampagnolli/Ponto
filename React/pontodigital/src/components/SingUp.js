@@ -11,7 +11,6 @@ const styles = {
     backgroundColor: '#3F51B5',
     },
     div:{
-        paddingTop:'3%',
         maxWidth:'400px',
         minWidth:'300px',
         margin: '0 auto',  
