@@ -9,6 +9,8 @@ import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
 import GroupIcon from 'material-ui/svg-icons/social/group';
 import FormatListBulletedIcon from 'material-ui/svg-icons/editor/format-list-bulleted';
 import NotificationsActiveIcon from 'material-ui/svg-icons/social/notifications-active';
+import KeyBoardArrowDownIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
+import KeyBoardArrowUpIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-up';
 import Equalizer from 'material-ui/svg-icons/av/equalizer'
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
@@ -18,6 +20,10 @@ import logo from 'statics/img/logo_autbank.jpg';
 import TextField from 'material-ui/TextField';
 import Badge from 'material-ui/Badge';
 import {black, redA700, white} from 'material-ui/styles/colors';
+import {
+  Link,
+  Redirect,
+} from 'react-router-dom'
 
 const styles={  
   ActionExitToApp: {
@@ -171,8 +177,8 @@ function wrapState(ComposedComponent) {
 SelectableList = wrapState(SelectableList);
 
 class  MenuListSelectable extends Component{
-    constructor(){
-      super()
+    constructor(props){
+      super(props)
       this.state = {itemConfiguracoesOpen : false}
     }
     changeItemConfiguracoesOpen(){
@@ -188,17 +194,20 @@ class  MenuListSelectable extends Component{
         value={1}
         leftIcon={<TodayIcon/>}
         primaryText="Calendario"
+        containerElement={<Link to='/ponto'/>}
       />
       <ListItem
         value={2}
         primaryText="Resumo"
         leftIcon={<DescriptionIcon/>}
+        containerElement={<Link to='/ponto'/>}
       />
      
       <ListItem
         value={3}
         leftIcon={<Equalizer/>}
         primaryText="Resumo Geral"
+        containerElement={<Link to='/ponto'/>}
       />
       <ListItem
         primaryText="Configurações"
@@ -206,19 +215,23 @@ class  MenuListSelectable extends Component{
         onClick={this.changeItemConfiguracoesOpen.bind(this)}
         open={this.state.itemConfiguracoesOpen}
         isKeyboardFocused={true}
-        rightToggle={
-          <NotificationsIcon onClick={this.changeItemConfiguracoesOpen.bind(this)}/>
+        rightIcon={
+          this.state.itemConfiguracoesOpen? 
+           <KeyBoardArrowUpIcon onClick={this.changeItemConfiguracoesOpen.bind(this)}/>
+          :<KeyBoardArrowDownIcon onClick={this.changeItemConfiguracoesOpen.bind(this)}/>
         }
         nestedItems={[
             <ListItem
               value={4}
               leftIcon={<GroupIcon/>}
               primaryText="Usuários"
+              containerElement={<Link to='/ponto/configuracoes/cadastrousuario'/>}
             />,
             <ListItem
             value={5}
             leftIcon={<FormatListBulletedIcon/>}
             primaryText="Categorias"
+            containerElement={<Link to='/ponto/configuracoes/categorias'/>}
           />,
           ]}
       />
