@@ -66,7 +66,7 @@ const styles={
   IconButtonNotification : {
     width: 30,
      height: 30
-    }
+    },
 
   
 }
@@ -91,6 +91,11 @@ class  MenuBox extends Component{
                 margin: this.props.openMenu?'0 0 0 253px':'0 0 0 0',
                 paddingLeft: 5
           },
+          AppBarOpen: {
+            display: 'flex',
+            width: 'auto',
+            margin: this.props.openMenu?'0 0 0 253px':'0 0 0 0',
+      },
         }
 
         let NotificationsType = null;
@@ -108,12 +113,13 @@ class  MenuBox extends Component{
                     badgeStyle={this.state.haveNotification ? styles.BadgeStyleActive : styles.BadgeStyle  }
                     style={styles.BadgeNotification}
                   >
+                  
                   <IconButton iconStyle={styles.IconButtonNotification}>
                         {NotificationsType }
                     </IconButton>
                   </Badge>}
                 showMenuIconButton={!this.props.openMenu}
-                style={styless.AppBar}
+                style={this.props.openMenu? styless.AppBar : styless.AppBarOpen}
                 
                 onLeftIconButtonTouchTap={this.props.updateOpenMenuTrue}
                 
