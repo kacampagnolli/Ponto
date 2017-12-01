@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import {Card, CardTitle, CardText} from 'material-ui/Card';
+import {Card, CardText} from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import Divider from 'material-ui/Divider';
-import DropDownMenu from 'material-ui/DropDownMenu';
-import MenuItem from 'material-ui/MenuItem';
+
 
 const styles = {
     CardTitle:{
@@ -74,31 +71,6 @@ class FormCard extends Component {
     };
 };
 
-
-class SingUp extends Component{
-
-    constructor(){
-        super();
-        this.state = {nome:'',senha:''};
-    }
-
-    setNome(evento){
-        this.setState({nome:evento.target.value});
-    }
-
-    setSenha(evento){
-        this.setState({senha:evento.targe.value});
-    }
-
-    render(){
-        return(
-           <div/>
-        );
-    }
-}
-
-
-
 const SingUpCard = () =>{
     return(
         <div style={styles.div}>
@@ -113,6 +85,3 @@ const SingUpCard = () =>{
 };
 
 export default SingUpCard;
-
-
-

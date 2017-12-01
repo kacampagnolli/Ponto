@@ -3,7 +3,7 @@ import {Card, CardText,CardTitle} from 'material-ui/Card';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import {GridList, GridTile} from 'material-ui/GridList';
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
 import Search from 'material-ui/svg-icons/action/search'
 import Divider from 'material-ui/Divider';
@@ -48,7 +48,7 @@ const styles = {
         height: 200,
         overflowY: 'auto',
       },
-      radioButton: {
+      checkbox: {
         marginBottom: 16,
       },
       iconStyles: {
@@ -90,13 +90,26 @@ class FormCard extends Component {
                     style={styles.gridList}
                 >
                 <GridTile>
-                <RadioButtonGroup name="notRight" labelPosition="left" style={styles.block}>
-                    <RadioButton
-                        value="reverse"
-                        label="Label on the left"
-                        style={styles.radioButton}
-                    />
-                </RadioButtonGroup>
+                <Checkbox
+          label="Label on the left"
+          labelPosition="left"
+          style={styles.checkbox}
+        />
+        <Checkbox
+          label="Label on the left"
+          labelPosition="left"
+          style={styles.checkbox}
+        />
+        <Checkbox
+          label="Label on the left"
+          labelPosition="left"
+          style={styles.checkbox}
+        />
+        <Checkbox
+          label="Label on the left"
+          labelPosition="left"
+          style={styles.checkbox}
+        />
  
                 </GridTile>
                 </GridList>
@@ -105,7 +118,7 @@ class FormCard extends Component {
     };
 };
 
-const CategoryCard = () =>{
+const TeamCard = () =>{
     return(
         <div style={styles.div}>
             <Card style={styles.Card}>
@@ -133,4 +146,4 @@ const CategoryCard = () =>{
 );
 };
 
-export default CategoryCard;
+export default TeamCard;

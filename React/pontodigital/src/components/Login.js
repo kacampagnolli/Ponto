@@ -34,9 +34,19 @@ const styles = {
 };
 
 class FormCard extends Component {
+
+    constructor(props){
+        super(props);
+    }
+
+    login (e) {
+        e.preventDefault();
+        this.props.history.push('/ponto')
+    };
+
     render(){
         return(
-            <form>
+            <form onSubmit={this.login.bind(this)}>
                 <TextField floatingLabelText="Usuário"
                     errorText=""
                     fullWidth={true}
@@ -61,7 +71,12 @@ class FormCard extends Component {
 };
 
 
-const LoginCard = () =>{
+class LoginCard extends Component{
+    constructor(props){
+        super(props)
+    }
+
+    render(){
     return(
         <div style={styles.div}>
             <Card style={styles.Card}>
@@ -74,12 +89,13 @@ const LoginCard = () =>{
                     subtitleColor="#616161"
                 />
                 <CardText>
-                    <FormCard />
+                    <FormCard {...this.props}/>
                 </CardText>
             </Card>
         </div>
 
 );
+    }
 };
 
 export default LoginCard;

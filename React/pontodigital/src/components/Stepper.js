@@ -8,6 +8,8 @@ import {
 } from 'material-ui/Stepper';
 import ArrowForwardIcon from 'material-ui/svg-icons/navigation/arrow-forward';
 import SingUp from './SingUp.js'
+import Category from './Category'
+import Team from './Team.js'
 /**
  * It is possible to specify your own step connector by passing an element to the `connector`
  * prop. If you want to remove the connector, pass `null` to the `connector` prop.
@@ -33,19 +35,12 @@ class CustomStepConnector extends React.Component {
 
       case 1:
         return (
-          <p>
-            {'An ad group contains one or more ads which target a shared set of keywords.'}
-          </p>
+          <Category />
         );
-
-      case 2:
+        
+        case 2:
         return (
-          <p>
-            {'Try out different ad text to see what brings in the most customers, and learn ' +
-            'how to enhance your ads using features like ad extensions. If you run into any ' +
-            'problems with your ads, find out how to tell if they\'re running and how to ' +
-            'resolve approval issues.'}
-          </p>
+          <Team />
         );
     }
   }
@@ -77,17 +72,17 @@ class CustomStepConnector extends React.Component {
           </Step>
 
           <Step>
-            <StepLabel>Equipe</StepLabel>
+            <StepLabel>Categoria</StepLabel>
           </Step>
 
           <Step>
-            <StepLabel>Categoria</StepLabel>
+            <StepLabel>Equipe</StepLabel>
           </Step>
         </Stepper>
 
         {this.getStepContent(stepIndex)}
 
-        <div style={{marginTop: 24, marginBottom: 12}}>
+        <div style={{marginTop: 24, marginBottom: 12, display:'flex', justifyContent:'space-between'}}>
           <FlatButton
             label="Back"
             disabled={stepIndex === 0}
