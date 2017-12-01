@@ -28,7 +28,7 @@ class PontoBox extends Component{
     }
     updateOpenMenuTrue(){
         
-        this.setState({openMenu: true })
+        this.setState({openMenu: !this.state.openMenu })
     }
     
     render(){

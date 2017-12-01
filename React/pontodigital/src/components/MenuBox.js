@@ -76,12 +76,14 @@ class  MenuBox extends Component{
     constructor(props) {
         super(props);
         this.logOut = this.logOut.bind(this)
-        this.state = {haveNotification : true}
+        this.state = {haveNotification : true, drawerOpen : false}
       }
      logOut(){
         this.props.history.push('/')
      }
-     
+     updateDrawerOpenStatus(){
+       this.setState({drawerOpen : !this.state.drawerOpen})
+     }
       render(){
 
         const styless={
@@ -108,6 +110,7 @@ class  MenuBox extends Component{
         return(
             <div>
             <AppBar 
+            
                  title={ <Badge
                     badgeContent={4}
                     badgeStyle={this.state.haveNotification ? styles.BadgeStyleActive : styles.BadgeStyle  }
@@ -121,7 +124,7 @@ class  MenuBox extends Component{
                 showMenuIconButton={!this.props.openMenu}
                 style={this.props.openMenu? styless.AppBar : styless.AppBarOpen}
                 
-                onLeftIconButtonTouchTap={this.props.updateOpenMenuTrue}
+                onLeftIconButtonTouchTap={this.updateDrawerOpenStatus.bind(this)}
                 
                 onRightIconButtonTouchTap={this.logOut}             
                 iconElementRight={
@@ -134,8 +137,9 @@ class  MenuBox extends Component{
                         <ActionExitToAppIcon />
                     </IconButton>}
                 />
-                
-            <Drawer open={this.props.openMenu}>
+            <Drawer open={this.props.openMenu?true:this.state.drawerOpen}
+            docked={this.props.openMenu}
+            onRequestChange={this.updateDrawerOpenStatus.bind(this)}>
             <MenuListSelectable />
             </Drawer>
 
