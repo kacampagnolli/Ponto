@@ -5,7 +5,10 @@ import ActionExitToAppIcon  from 'material-ui/svg-icons/action/exit-to-app';
 import TodayIcon  from 'material-ui/svg-icons/action/today';
 import DescriptionIcon  from 'material-ui/svg-icons/action/description';
 import SettingsIcon  from 'material-ui/svg-icons/action/settings';
+import AlertErrorOutLineIcon  from 'material-ui/svg-icons/alert/error-outline';
+import AlertWarningIcon  from 'material-ui/svg-icons/alert/warning';
 import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
+import CheckIcon from 'material-ui/svg-icons/navigation/check';
 import GroupIcon from 'material-ui/svg-icons/social/group';
 import FormatListBulletedIcon from 'material-ui/svg-icons/editor/format-list-bulleted';
 import NotificationsActiveIcon from 'material-ui/svg-icons/social/notifications-active';
@@ -20,10 +23,11 @@ import logo from 'statics/img/logo_autbank.jpg';
 import TextField from 'material-ui/TextField';
 import Badge from 'material-ui/Badge';
 import {black, redA700, white} from 'material-ui/styles/colors';
-import {
-  Link,
-  Redirect,
-} from 'react-router-dom'
+import MenuItem from 'material-ui/MenuItem';
+import {Link,Redirect,} from 'react-router-dom'
+import Popover from 'material-ui/Popover';
+import Menu from 'material-ui/Menu';
+import Divider from 'material-ui/Divider';
 
 const styles={  
   ActionExitToApp: {
@@ -67,7 +71,10 @@ const styles={
     width: 30,
      height: 30
     },
-
+  PopOver : {
+    width : 300,
+    height : 300
+  }
   
 }
 
@@ -76,7 +83,7 @@ class  MenuBox extends Component{
     constructor(props) {
         super(props);
         this.logOut = this.logOut.bind(this)
-        this.state = {haveNotification : true, drawerOpen : false}
+        this.state = {haveNotification : true, drawerOpen : false, popOver : false}
       }
      logOut(){
         this.props.history.push('/')
@@ -84,6 +91,23 @@ class  MenuBox extends Component{
      updateDrawerOpenStatus(){
        this.setState({drawerOpen : !this.state.drawerOpen})
      }
+
+     clickPopOverOpen = (event) => {
+      event.preventDefault();
+  
+      this.setState({
+        popOver: true,
+        anchorEl: event.currentTarget,
+      });
+      console.log(this.state.anchorEl)
+    };
+  
+    clickPopOverClose = () => {
+      this.setState({
+        popOver: false,
+      });
+    };
+
       render(){
 
         const styless={
@@ -102,7 +126,7 @@ class  MenuBox extends Component{
 
         let NotificationsType = null;
         if (this.state.haveNotification) {
-            NotificationsType = <NotificationsActiveIcon color={redA700}/>;
+            NotificationsType = <NotificationsActiveIcon color={redA700}  onClick={this.clickPopOverOpen}/>;
         } else {
             NotificationsType = <NotificationsIcon color={black} />;
         }
@@ -116,10 +140,40 @@ class  MenuBox extends Component{
                     badgeStyle={this.state.haveNotification ? styles.BadgeStyleActive : styles.BadgeStyle  }
                     style={styles.BadgeNotification}
                   >
-                  
                   <IconButton iconStyle={styles.IconButtonNotification}>
                         {NotificationsType }
                     </IconButton>
+                        <Popover 
+                            style={styles.PopOver}
+                            open={this.state.popOver}
+                            anchorEl={this.state.anchorEl}
+                            anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+                            targetOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                            onRequestClose={this.clickPopOverClose}
+                          >
+                            <Menu>
+                              <MenuItem primaryText="Refresh" leftIcon={
+                                <AlertErrorOutLineIcon/>
+                              }
+                              rightIcon={<CheckIcon/>}/>
+                              <MenuItem primaryText="Help &amp; feedback"leftIcon={
+                                <AlertErrorOutLineIcon/>
+                              } rightIcon={<CheckIcon/>}/>
+                              <MenuItem primaryText="Settings"leftIcon={
+                                <AlertErrorOutLineIcon/>
+                              } rightIcon={<CheckIcon/>}/>
+                              <Divider />
+                              <MenuItem primaryText="Sign out" leftIcon={
+                                <AlertWarningIcon/>
+                              } rightIcon={<CheckIcon/>}/>
+                              <MenuItem primaryText="Sign out" leftIcon={
+                                <AlertWarningIcon/>
+                              } rightIcon={<CheckIcon/>}/>
+                              <MenuItem primaryText="Sign out" leftIcon={
+                                <AlertWarningIcon/>
+                              } rightIcon={<CheckIcon/>}/>
+                            </Menu>
+                          </Popover>
                   </Badge>}
                 showMenuIconButton={!this.props.openMenu}
                 style={this.props.openMenu? styless.AppBar : styless.AppBarOpen}
@@ -235,7 +289,7 @@ class  MenuListSelectable extends Component{
               value={4}
               leftIcon={<GroupIcon/>}
               primaryText="Usuários"
-              containerElement={<Link to='/ponto/configuracoes/cadastrousuario'/>}
+              containerElement={<Link to='/ponto/configuracoes/usuarios'/>}
             />,
             <ListItem
             value={5}
