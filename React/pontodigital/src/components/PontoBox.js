@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Switch,Route,Router} from 'react-router-dom'
 
-import Stepper from './Stepper.js'
+import User from './User.js'
 import Category from './Category.js'
 import MenuBox from './MenuBox.js'
 
@@ -43,7 +43,7 @@ class PontoBox extends Component{
                 <div>
                 <MenuBox {...this.state} {...this.props} updateOpenMenuTrue={this.updateOpenMenuTrue}/>
                <div style={styles.divCenter}>
-                    <Route  path={this.props.match.url + "/configuracoes/cadastrousuario"} component={Stepper}/>
+                    <Route  path={this.props.match.url + "/configuracoes/usuarios"} component={User}/>
                     <Route exact path={this.props.match.url + "/configuracoes/categorias"} component={Category}/>
                 </div>
             </div>

@@ -8,8 +8,16 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
+import {Switch,Route,Router} from 'react-router-dom'
 import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
+import IconButton from 'material-ui/IconButton';
+import Clear from 'material-ui/svg-icons/content/clear';
+import Create from 'material-ui/svg-icons/content/create';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
+import Stepper from './Stepper.js';
+import MenuBox from './MenuBox.js';
 
 const styles = {
   propContainer: {
@@ -20,6 +28,9 @@ const styles = {
   propToggleHeader: {
     margin: '20px auto 10px',
   },
+  divTable:{
+    maxWidth:800,
+  }
 };
 
 const tableData = [
@@ -56,7 +67,29 @@ const tableData = [
 /**
  * A more complex example, allowing the table height to be set, and key boolean properties to be toggled.
  */
-export default class User extends Component {
+
+export default class UserBox extends Component{
+  constructor(props){
+    super(props);
+    console.log(props);
+  }
+
+  render(){
+    return(
+        <Router history={this.props.history}>
+               <div>
+                <Route exact path={"/ponto/configuracoes/usuarios"} component={User}/>
+                <Route exact path={"/ponto/configuracoes/usuarios/usuario"} component={Stepper}/>
+            </div>
+        </Router> 
+    );
+}
+}
+
+class User extends Component {
+
+
+
   state = {
     fixedHeader: true,
     fixedFooter: true,
@@ -68,6 +101,32 @@ export default class User extends Component {
     deselectOnClickaway: true,
     showCheckboxes: false,
     height: '300px',
+    coments: [],
+  };
+
+  componentWillMount(){
+    console.log("Aqui");
+    fetch('http://localhost:3000/comments', {
+      method: 'get'
+    }).then((response) => response.json())  
+      .then((responseJson) => {
+        this.setState({coments:responseJson});
+        const comentario = this.state.coments;
+        comentario.map((coment)=>{
+          console.log(coment.id);
+        });
+    }).catch(function(err) {
+      // Error :(
+    });
+
+
+
+  }
+
+  novo (e) {
+    e.preventDefault();
+    this.props.history.push('/ponto/configuracoes/usuarios/usuario');
+
   };
 
   handleToggle = (event, toggled) => {
@@ -82,7 +141,7 @@ export default class User extends Component {
 
   render() {
     return (
-      <div>
+      <div style={styles.divTable}>
         <Table
           height={this.state.height}
           fixedHeader={this.state.fixedHeader}
@@ -100,6 +159,7 @@ export default class User extends Component {
               <TableHeaderColumn tooltip="Categoria">Categoria</TableHeaderColumn>
               <TableHeaderColumn tooltip="Equipe">Equipe</TableHeaderColumn>
               <TableHeaderColumn tooltip="Status">Status</TableHeaderColumn>
+              <TableHeaderColumn tooltip="action"></TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody
@@ -114,10 +174,35 @@ export default class User extends Component {
                 <TableRowColumn>{row.status}</TableRowColumn>
                 <TableRowColumn>{row.status}</TableRowColumn>
                 <TableRowColumn>{row.status}</TableRowColumn>
+                <TableRowColumn>
+                <IconButton
+                    iconStyle={styles.mediumIcon}
+                    style={styles.medium}
+                >
+                    <Create />
+                </IconButton>
+                <IconButton
+                    iconStyle={styles.mediumIcon}
+                    style={styles.medium}
+                >
+                    <Clear />
+                </IconButton>
+                </TableRowColumn>
               </TableRow>
               ))}
           </TableBody>
         </Table>
+        <div style={{marginTop: 24, marginBottom: 12, display:'flex', justifyContent:'space-between'}}>
+          <FlatButton
+            label="Back"
+            style={{marginRight: 12}}
+          />
+          <RaisedButton
+            label="Novo"
+            primary={true}
+            onClick={this.novo.bind(this)}
+          />
+        </div>
         </div>
     );
   }

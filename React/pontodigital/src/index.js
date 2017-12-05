@@ -10,7 +10,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Login from './components/Login.js'
 import PontoBox from './components/PontoBox.js'
 import Stepper from './components/Stepper.js'
-
+import User from './components/User.js'
 
 const muiTheme = getMuiTheme({
     palette: {
@@ -28,7 +28,6 @@ const App = () => (
     <Switch>
         <Route exact path="/" component={Login}/>
         <Route path="/ponto" component={PontoBox}/>
-        <Route path="/SingUp" component={Stepper}/>
     </Switch>
 </BrowserRouter>
   );
