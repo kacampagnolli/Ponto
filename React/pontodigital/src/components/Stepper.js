@@ -58,6 +58,8 @@ class CustomStepConnector extends React.Component {
 
     if (stepIndex > 0) {
       this.setState({stepIndex: stepIndex - 1});
+    }else{
+      this.props.history.push('/ponto/configuracoes/usuarios');
     }
   }
 
@@ -85,7 +87,6 @@ class CustomStepConnector extends React.Component {
         <div style={{marginTop: 24, marginBottom: 12, display:'flex', justifyContent:'space-between'}}>
           <FlatButton
             label="Back"
-            disabled={stepIndex === 0}
             onClick={this.handlePrev}
             style={{marginRight: 12}}
           />

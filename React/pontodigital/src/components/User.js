@@ -14,10 +14,12 @@ import Toggle from 'material-ui/Toggle';
 import IconButton from 'material-ui/IconButton';
 import Clear from 'material-ui/svg-icons/content/clear';
 import Create from 'material-ui/svg-icons/content/create';
-import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
+import PersonAdd from 'material-ui/svg-icons/social/person-add';
 import Stepper from './Stepper.js';
 import MenuBox from './MenuBox.js';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton'
 
 const styles = {
   propContainer: {
@@ -77,10 +79,10 @@ export default class UserBox extends Component{
   render(){
     return(
         <Router history={this.props.history}>
-               <div>
+               <div style={{display:'flex',justifyContent:'center',alignItems:'center',padding:'3%'}}>
                 <Route exact path={"/ponto/configuracoes/usuarios"} component={User}/>
                 <Route exact path={"/ponto/configuracoes/usuarios/usuario"} component={Stepper}/>
-            </div>
+              </div>
         </Router> 
     );
 }
@@ -102,6 +104,7 @@ class User extends Component {
     showCheckboxes: false,
     height: '300px',
     coments: [],
+    open: false,
   };
 
   componentWillMount(){
@@ -139,8 +142,42 @@ class User extends Component {
     this.setState({height: event.target.value});
   };
 
+
+  handleOpen = () => {
+    this.setState({open: true});
+  };
+
+  handleClose = () => {
+    this.setState({open: false});
+  };
+
   render() {
+    const actions = [
+      <FlatButton
+        label="Cancelar"
+        primary={true}
+        onClick={this.handleClose}
+      />,
+      <FlatButton
+        label="Excluir"
+        primary={true}
+        keyboardFocused={true}
+        onClick={this.handleClose}
+      />,
+    ];
     return (
+      <div>
+      <Dialog
+      title="Excluir"
+      actions={actions}
+      modal={false}
+      open={this.state.open}
+      onRequestClose={this.handleClose}
+      contentStyle={{minWidth:300,width:400}}
+      >
+      Você deseja excluir?.
+     </Dialog>
+    
       <div style={styles.divTable}>
         <Table
           height={this.state.height}
@@ -154,12 +191,23 @@ class User extends Component {
             adjustForCheckbox={this.state.showCheckboxes}
             enableSelectAll={this.state.enableSelectAll}
           >
+          
             <TableRow>
               <TableHeaderColumn tooltip="Nome">Nome</TableHeaderColumn>
               <TableHeaderColumn tooltip="Categoria">Categoria</TableHeaderColumn>
               <TableHeaderColumn tooltip="Equipe">Equipe</TableHeaderColumn>
               <TableHeaderColumn tooltip="Status">Status</TableHeaderColumn>
-              <TableHeaderColumn tooltip="action"></TableHeaderColumn>
+              <TableHeaderColumn tooltip="action">
+              <div style={{display:'flex',justifyContent:'center'}}>
+              <IconButton
+                    iconStyle={styles.mediumIcon}
+                    style={styles.medium}
+                    onClick={this.novo.bind(this)}
+                >
+                    <PersonAdd />
+                </IconButton>
+              </div>
+              </TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody
@@ -184,6 +232,7 @@ class User extends Component {
                 <IconButton
                     iconStyle={styles.mediumIcon}
                     style={styles.medium}
+                    onClick={this.handleOpen}
                 >
                     <Clear />
                 </IconButton>
@@ -192,16 +241,7 @@ class User extends Component {
               ))}
           </TableBody>
         </Table>
-        <div style={{marginTop: 24, marginBottom: 12, display:'flex', justifyContent:'space-between'}}>
-          <FlatButton
-            label="Back"
-            style={{marginRight: 12}}
-          />
-          <RaisedButton
-            label="Novo"
-            primary={true}
-            onClick={this.novo.bind(this)}
-          />
+       
         </div>
         </div>
     );
