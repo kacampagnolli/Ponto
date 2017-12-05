@@ -73,8 +73,42 @@ const styles={
     },
   PopOver : {
     width : 300,
-    height : 300
-  }
+    height : 300,
+    overflow : 'hidden'
+  },
+  MenuItemNotification : {
+    fontSize : 13, 
+    maxWidth: 300,
+    whiteSpace : 'normal',
+    marginBottom:  10
+    
+  },
+  NotificationParagraph : {
+    lineHeight : '15px',
+    paddingLeft : 30,
+    paddingRight: 30,
+
+  },
+  MenuListPopOver : {
+    paddingLeft : 0,
+    paddingTop: 5
+  },
+  CheckIconPopOver : {
+    width:'27px',
+    height : '27px', 
+    marginBottom:  0, 
+    marginTop:  'auto',
+    marginRight:  5, 
+    right : 0
+  },
+  AlertErrorOutLineIconPopOver : {
+    width: 22,
+    height : 22, 
+    marginTop:  0, 
+    marginLeft: 5,  
+    left : 0
+  },
+
   
 }
 
@@ -151,27 +185,44 @@ class  MenuBox extends Component{
                             targetOrigin={{horizontal: 'left', vertical: 'bottom'}}
                             onRequestClose={this.clickPopOverClose}
                           >
-                            <Menu>
-                              <MenuItem primaryText="Refresh" leftIcon={
-                                <AlertErrorOutLineIcon/>
+                            <Menu menuItemStyle={styles.MenuItemNotification}
+                            listStyle={styles.MenuListPopOver}
+                            autoWidth={false}>
+                            
+                              <MenuItem primaryText={"Kaue chegou atrasado hoje ! Kaue chegou atrasado hoje ! Kaue chegou atrasado hoje Kaue chegou atrasado hoje Kaue chegou atrasado hoje Kaue chegou atrasado hoje Kaue chegou atrasado hojeKaue chegou atrasado hojeKaue chegou atrasado hoje"} 
+                              innerDivStyle={styles.NotificationParagraph}
+                              leftIcon={
+                                <AlertErrorOutLineIcon style={styles.AlertErrorOutLineIconPopOver} />
                               }
-                              rightIcon={<CheckIcon/>}/>
-                              <MenuItem primaryText="Help &amp; feedback"leftIcon={
-                                <AlertErrorOutLineIcon/>
-                              } rightIcon={<CheckIcon/>}/>
-                              <MenuItem primaryText="Settings"leftIcon={
-                                <AlertErrorOutLineIcon/>
-                              } rightIcon={<CheckIcon/>}/>
+                              /* TODO colcaor Hover */
+                              rightIcon={<CheckIcon style={styles.CheckIconPopOver} />}/>
+                              
+                              <MenuItem primaryText="Help &amp; feedback"
+                              innerDivStyle={styles.NotificationParagraph}
+                              leftIcon={
+                                <AlertErrorOutLineIcon  style={styles.AlertErrorOutLineIconPopOver}/>
+                              } 
+                              rightIcon={<CheckIcon style={styles.CheckIconPopOver}/>}/>
                               <Divider />
-                              <MenuItem primaryText="Sign out" leftIcon={
-                                <AlertWarningIcon/>
-                              } rightIcon={<CheckIcon/>}/>
-                              <MenuItem primaryText="Sign out" leftIcon={
-                                <AlertWarningIcon/>
-                              } rightIcon={<CheckIcon/>}/>
-                              <MenuItem primaryText="Sign out" leftIcon={
-                                <AlertWarningIcon/>
-                              } rightIcon={<CheckIcon/>}/>
+
+                              <MenuItem primaryText="Help &amp; feedback"
+                              innerDivStyle={styles.NotificationParagraph}
+                              leftIcon={
+                                <AlertWarningIcon  style={styles.AlertErrorOutLineIconPopOver}/>
+                              } 
+                              rightIcon={<CheckIcon style={styles.CheckIconPopOver}/>}/>
+                              <MenuItem primaryText="Help &amp; feedback"
+                              innerDivStyle={styles.NotificationParagraph}
+                              leftIcon={
+                                <AlertWarningIcon  style={styles.AlertErrorOutLineIconPopOver}/>
+                              } 
+                              rightIcon={<CheckIcon style={styles.CheckIconPopOver}/>}/>
+                              <MenuItem primaryText="Help &amp; feedback"
+                              innerDivStyle={styles.NotificationParagraph}
+                              leftIcon={
+                                <AlertWarningIcon  style={styles.AlertErrorOutLineIconPopOver}/>
+                              } 
+                              rightIcon={<CheckIcon style={styles.CheckIconPopOver}/>}/>
                             </Menu>
                           </Popover>
                   </Badge>}
