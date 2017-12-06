@@ -8,6 +8,7 @@ import SettingsIcon  from 'material-ui/svg-icons/action/settings';
 import AlertErrorOutLineIcon  from 'material-ui/svg-icons/alert/error-outline';
 import AlertWarningIcon  from 'material-ui/svg-icons/alert/warning';
 import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
+import PersonIcon from 'material-ui/svg-icons/social/person';
 import CheckIcon from 'material-ui/svg-icons/navigation/check';
 import GroupIcon from 'material-ui/svg-icons/social/group';
 import FormatListBulletedIcon from 'material-ui/svg-icons/editor/format-list-bulleted';
@@ -29,9 +30,10 @@ import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import Divider from 'material-ui/Divider';
 import AutoComplete from 'material-ui/AutoComplete';
+import {Switch,Route,Router} from 'react-router-dom'
 
 const persons = [
-  'Leonardo', 'Kaue',
+  'Leonardo', 'Leo', 'Kaue',
 ];
 
 
@@ -49,6 +51,7 @@ const styles={
   
   }, 
   Subheader : {
+    cursor: 'pointer',
     backgroundColor: '#3F51B5',
     display: 'flex',
     alignItems: 'center',
@@ -153,7 +156,8 @@ export default  class  MenuBox extends Component{
       return(
           <div>
           <TopMenu {...this.state} {...this.props} updateDrawerOpenStatus={this.updateDrawerOpenStatus} />
-          <SideMenu {...this.state} {...this.props} updateDrawerOpenStatus={this.updateDrawerOpenStatus}/>   
+          <SideMenu {...this.state} {...this.props} updateDrawerOpenStatus={this.updateDrawerOpenStatus}/>
+
           </div>
       );
     }
@@ -296,8 +300,11 @@ class SideMenu extends Component{
     return(
       <Drawer open={this.props.openMenu?true:this.props.drawerOpen}
       docked={this.props.openMenu}
-      onRequestChange={this.props.updateDrawerOpenStatus}>
-      <MenuListSelectable />
+      onRequestChange={this.props.updateDrawerOpenStatus}
+      >
+      
+      <MenuListSelectable  history={this.props.history} />
+      <ActionDivMenu history={this.props.history}/>
       </Drawer>
     )
   }
@@ -332,6 +339,7 @@ function wrapState(ComposedComponent) {
           onChange={this.handleRequestChange}
         >
           {this.props.children}
+         
         </ComposedComponent>
       );
     }
@@ -348,23 +356,26 @@ class  MenuListSelectable extends Component{
     changeItemConfiguracoesOpen(){
       this.setState( {itemConfiguracoesOpen : !this.state.itemConfiguracoesOpen});
       }
+    logoClick(){
+      this.props.history.push('/ponto')
+    }
     render(){
       return(
   <SelectableList defaultValue={1}>
         <Subheader style={styles.Subheader}>
-            <img src={logo}  alt="Logo"/>
+            <img src={logo} onClick={this.logoClick.bind(this)} alt="Logo"/>
         </Subheader>
       <ListItem
         value={1}
         leftIcon={<TodayIcon/>}
         primaryText="Calendario"
-        containerElement={<Link to='/ponto'/>}
+        containerElement={<Link to='/ponto/calendario'/>}
       />
       <ListItem
         value={2}
         primaryText="Resumo"
         leftIcon={<DescriptionIcon/>}
-        containerElement={<Link to='/ponto'/>}
+        containerElement={<Link to='/ponto/resumo'/>}
       />
      
       <ListItem
@@ -387,7 +398,7 @@ class  MenuListSelectable extends Component{
         nestedItems={[
             <ListItem
               value={4}
-              leftIcon={<GroupIcon/>}
+              leftIcon={<PersonIcon/>}
               primaryText="Usuários"
               containerElement={<Link to='/ponto/configuracoes/usuarios'/>}
             />,
@@ -397,6 +408,12 @@ class  MenuListSelectable extends Component{
             primaryText="Categorias"
             containerElement={<Link to='/ponto/configuracoes/categorias'/>}
           />,
+          <ListItem
+          value={6}
+          leftIcon={<GroupIcon/>}
+          primaryText="Equipes"
+          containerElement={<Link to='/ponto/configuracoes/equipes'/>}
+        />,
           ]}
       />
     </SelectableList>
@@ -404,4 +421,56 @@ class  MenuListSelectable extends Component{
     }
   }
 
+  class  ActionDivMenu extends Component{
+    constructor(props){
+      super(props)
+    }
+    render(){
+      return(
+        <Router history={this.props.history}>
+        <div style ={{position: 'relative', bottom: 0, left:0, }}>
+          <Route exact path={"/ponto/calendario"} component={CalendarioActionMenu}/>
+          <Route exact path={"/ponto/resumo"} component={ResumoActionMenu}/>
+        </div>
+        </Router> 
+      )
+    }
+}
 
+class  ActionMenuBase extends Component{
+  constructor(props){
+    super(props)
+  }
+  render(){
+    return(
+      <div style ={{bottom: 0, left: 0}}>
+        {this.props.children}
+      </div>
+    )
+  }
+}
+
+class  CalendarioActionMenu extends Component{
+  constructor(props){
+    super(props)
+  }
+  render(){
+    return(
+      <ActionMenuBase>
+      <h1></h1>
+      </ActionMenuBase>
+    )
+  }
+}
+class  ResumoActionMenu extends Component{
+  constructor(props){
+    super(props)
+  }
+  render(){
+    return(
+      <ActionMenuBase>
+      <h1></h1>
+      </ActionMenuBase>
+    )
+  }
+}
