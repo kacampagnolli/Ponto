@@ -14,7 +14,7 @@ import Toggle from 'material-ui/Toggle';
 import IconButton from 'material-ui/IconButton';
 import Clear from 'material-ui/svg-icons/content/clear';
 import Create from 'material-ui/svg-icons/content/create';
-import GroupAdd from 'material-ui/svg-icons/social/group-add';
+import CategoryAdd from 'material-ui/svg-icons/av/playlist-add';
 import NewCategory from './NewCategory.js';
 import MenuBox from './MenuBox.js';
 import Dialog from 'material-ui/Dialog';
@@ -253,7 +253,7 @@ class Category extends Component {
                     style={styles.medium}
                     onClick={this.novo.bind(this)}
                 >
-                    <GroupAdd />
+                    <CategoryAdd />
                 </IconButton>
               </div>
               </TableHeaderColumn>
