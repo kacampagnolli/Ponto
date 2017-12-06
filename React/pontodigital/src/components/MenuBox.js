@@ -28,6 +28,12 @@ import {Link,Redirect,} from 'react-router-dom'
 import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import Divider from 'material-ui/Divider';
+import AutoComplete from 'material-ui/AutoComplete';
+
+const persons = [
+  'Leonardo', 'Kaue',
+];
+
 
 const styles={  
   ActionExitToApp: {
@@ -53,8 +59,14 @@ const styles={
   },
   BadgeNotification : {
     padding: '0 0 0 0',
-    margin: 'auto'
+    margin: 'auto auto auto 0'
   }, 
+  DivTitleAppBar : {
+    display : 'flex',
+    alignItems : 'center',
+    width : 100,
+    height: '100%'
+  },
   BadgeStyleActive : {
     top: 0, 
     right: -3, 
@@ -108,151 +120,188 @@ const styles={
     marginLeft: 5,  
     left : 0
   },
-
-  
+  AppBar: {
+    display: 'flex',
+    width: 'auto',
+    margin: '0 0 0 0',
+  },
+  AppBarOpen: {
+  display: 'flex',
+  width: 'auto',
+  margin: '0 0 0 253px',
+  paddingLeft: 5
+  },
+  AutoComplete : {
+    marginLeft: 50,
+    width : 350
+  },
 }
 
-class  MenuBox extends Component{
+export default  class  MenuBox extends Component{
 
     constructor(props) {
         super(props);
-        this.logOut = this.logOut.bind(this)
-        this.state = {haveNotification : true, drawerOpen : false, popOver : false}
+        this.state = { drawerOpen : false}
+        this.updateDrawerOpenStatus = this.updateDrawerOpenStatus.bind(this)
       }
-     logOut(){
-        this.props.history.push('/')
-     }
+     
      updateDrawerOpenStatus(){
        this.setState({drawerOpen : !this.state.drawerOpen})
      }
 
-     clickPopOverOpen = (event) => {
+    render(){
+      return(
+          <div>
+          <TopMenu {...this.state} {...this.props} updateDrawerOpenStatus={this.updateDrawerOpenStatus} />
+          <SideMenu {...this.state} {...this.props} updateDrawerOpenStatus={this.updateDrawerOpenStatus}/>   
+          </div>
+      );
+    }
+}
+
+/********** Start Top Menu **********/
+class TopMenu extends Component{
+
+    constructor(props){
+      super(props)
+      this.logOut = this.logOut.bind(this)
+      this.state = {haveNotification : true, popOver : false, }
+    }
+    clickPopOverClose = () => {
+      this.setState({
+        popOver: false,
+      });
+    }
+
+    clickPopOverOpen = (event) => {
       event.preventDefault();
   
       this.setState({
         popOver: true,
         anchorEl: event.currentTarget,
       });
-      console.log(this.state.anchorEl)
-    };
-  
-    clickPopOverClose = () => {
-      this.setState({
-        popOver: false,
-      });
-    };
-
-      render(){
-
-        const styless={
-            AppBar: {
-                display: 'flex',
-                width: 'auto',
-                margin: this.props.openMenu?'0 0 0 253px':'0 0 0 0',
-                paddingLeft: 5
-          },
-          AppBarOpen: {
-            display: 'flex',
-            width: 'auto',
-            margin: this.props.openMenu?'0 0 0 253px':'0 0 0 0',
-      },
-        }
-
-        let NotificationsType = null;
-        if (this.state.haveNotification) {
-            NotificationsType = <NotificationsActiveIcon color={redA700}  onClick={this.clickPopOverOpen}/>;
-        } else {
-            NotificationsType = <NotificationsIcon color={black} />;
-        }
-
-        return(
-            <div>
-            <AppBar 
-            
-                 title={ <Badge
-                    badgeContent={4}
-                    badgeStyle={this.state.haveNotification ? styles.BadgeStyleActive : styles.BadgeStyle  }
-                    style={styles.BadgeNotification}
-                  >
-                  <IconButton iconStyle={styles.IconButtonNotification}>
-                        {NotificationsType }
-                    </IconButton>
-                        <Popover 
-                            style={styles.PopOver}
-                            open={this.state.popOver}
-                            anchorEl={this.state.anchorEl}
-                            anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-                            targetOrigin={{horizontal: 'left', vertical: 'bottom'}}
-                            onRequestClose={this.clickPopOverClose}
-                          >
-                            <Menu menuItemStyle={styles.MenuItemNotification}
-                            listStyle={styles.MenuListPopOver}
-                            autoWidth={false}>
-                            
-                              <MenuItem primaryText={"Kaue chegou atrasado hoje ! Kaue chegou atrasado hoje ! Kaue chegou atrasado hoje Kaue chegou atrasado hoje Kaue chegou atrasado hoje Kaue chegou atrasado hoje Kaue chegou atrasado hojeKaue chegou atrasado hojeKaue chegou atrasado hoje"} 
-                              innerDivStyle={styles.NotificationParagraph}
-                              leftIcon={
-                                <AlertErrorOutLineIcon style={styles.AlertErrorOutLineIconPopOver} />
-                              }
-                              /* TODO colcaor Hover */
-                              rightIcon={<CheckIcon style={styles.CheckIconPopOver} />}/>
-                              
-                              <MenuItem primaryText="Help &amp; feedback"
-                              innerDivStyle={styles.NotificationParagraph}
-                              leftIcon={
-                                <AlertErrorOutLineIcon  style={styles.AlertErrorOutLineIconPopOver}/>
-                              } 
-                              rightIcon={<CheckIcon style={styles.CheckIconPopOver}/>}/>
-                              <Divider />
-
-                              <MenuItem primaryText="Help &amp; feedback"
-                              innerDivStyle={styles.NotificationParagraph}
-                              leftIcon={
-                                <AlertWarningIcon  style={styles.AlertErrorOutLineIconPopOver}/>
-                              } 
-                              rightIcon={<CheckIcon style={styles.CheckIconPopOver}/>}/>
-                              <MenuItem primaryText="Help &amp; feedback"
-                              innerDivStyle={styles.NotificationParagraph}
-                              leftIcon={
-                                <AlertWarningIcon  style={styles.AlertErrorOutLineIconPopOver}/>
-                              } 
-                              rightIcon={<CheckIcon style={styles.CheckIconPopOver}/>}/>
-                              <MenuItem primaryText="Help &amp; feedback"
-                              innerDivStyle={styles.NotificationParagraph}
-                              leftIcon={
-                                <AlertWarningIcon  style={styles.AlertErrorOutLineIconPopOver}/>
-                              } 
-                              rightIcon={<CheckIcon style={styles.CheckIconPopOver}/>}/>
-                            </Menu>
-                          </Popover>
-                  </Badge>}
-                showMenuIconButton={!this.props.openMenu}
-                style={this.props.openMenu? styless.AppBar : styless.AppBarOpen}
-                
-                onLeftIconButtonTouchTap={this.updateDrawerOpenStatus.bind(this)}
-                
-                onRightIconButtonTouchTap={this.logOut}             
-                iconElementRight={
-                 /* TODO Colocar efeito no click */
-                    <IconButton
-                        iconStyle={styles.ActionExitToApp}
-                        style={styles.IconButton}
-                        tooltip="Sair"
-                        tooltipPosition="bottom-left">
-                        <ActionExitToAppIcon />
-                    </IconButton>}
-                />
-            <Drawer open={this.props.openMenu?true:this.state.drawerOpen}
-            docked={this.props.openMenu}
-            onRequestChange={this.updateDrawerOpenStatus.bind(this)}>
-            <MenuListSelectable />
-            </Drawer>
-
-            </div>
-        );
     }
+
+    logOut(){
+      this.props.history.push('/')
+   }
+
+    render(){
+      let NotificationsType = null;
+      if (this.state.haveNotification) {
+          NotificationsType = <NotificationsActiveIcon color={redA700}  onClick={this.clickPopOverOpen}/>;
+      } else {
+          NotificationsType = <NotificationsIcon color={black} />;
+      }
+
+      return (
+      <AppBar 
+            title={
+            <div style={styles.DivTitleAppBar}>
+              <Badge
+                badgeContent={4}
+                badgeStyle={this.state.haveNotification ? styles.BadgeStyleActive : styles.BadgeStyle  }
+                style={styles.BadgeNotification}>
+                <IconButton iconStyle={styles.IconButtonNotification}>
+                    {NotificationsType }
+                </IconButton>
+
+                <Popover 
+                  style={styles.PopOver}
+                  open={this.state.popOver}
+                  anchorEl={this.state.anchorEl}
+                  anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+                  targetOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                  onRequestClose={this.clickPopOverClose}>
+                  <Menu menuItemStyle={styles.MenuItemNotification}
+                    listStyle={styles.MenuListPopOver}
+                    autoWidth={false}>
+                  <MenuItem primaryText={"Kaue chegou atrasado hoje ! Kaue chegou atrasado hoje ! Kaue chegou atrasado hoje Kaue chegou atrasado hoje Kaue chegou atrasado hoje Kaue chegou atrasado hoje Kaue chegou atrasado hojeKaue chegou atrasado hojeKaue chegou atrasado hoje"} 
+                    innerDivStyle={styles.NotificationParagraph}
+                    leftIcon={
+                      <AlertErrorOutLineIcon style={styles.AlertErrorOutLineIconPopOver} />
+                    }
+                    /* TODO colcaor Hover */
+                    rightIcon={<CheckIcon style={styles.CheckIconPopOver} />}/>
+                    
+                    <MenuItem primaryText="Help &amp; feedback"
+                    innerDivStyle={styles.NotificationParagraph}
+                    leftIcon={
+                      <AlertErrorOutLineIcon  style={styles.AlertErrorOutLineIconPopOver}/>
+                    } 
+                    rightIcon={<CheckIcon style={styles.CheckIconPopOver}/>}/>
+                    <Divider />
+
+                    <MenuItem primaryText="Help &amp; feedback"
+                    innerDivStyle={styles.NotificationParagraph}
+                    leftIcon={
+                      <AlertWarningIcon  style={styles.AlertErrorOutLineIconPopOver}/>
+                    } 
+                    rightIcon={<CheckIcon style={styles.CheckIconPopOver}/>}/>
+                    <MenuItem primaryText="Help &amp; feedback"
+                    innerDivStyle={styles.NotificationParagraph}
+                    leftIcon={
+                      <AlertWarningIcon  style={styles.AlertErrorOutLineIconPopOver}/>
+                    } 
+                    rightIcon={<CheckIcon style={styles.CheckIconPopOver}/>}/>
+                    <MenuItem primaryText="Help &amp; feedback"
+                    innerDivStyle={styles.NotificationParagraph}
+                    leftIcon={
+                      <AlertWarningIcon  style={styles.AlertErrorOutLineIconPopOver}/>
+                    } 
+                    rightIcon={<CheckIcon style={styles.CheckIconPopOver}/>}/>
+                  </Menu>
+                </Popover>
+              </Badge>
+              <div>
+                 {/* TODO arrumar linha */}
+                  <AutoComplete
+                  style={styles.AutoComplete}
+                  fullWidth={true}
+                  filter={AutoComplete.fuzzyFilter}
+                  dataSource={persons}
+                  maxSearchResults={5}
+                  />
+              </div>
+            </div>}
+          showMenuIconButton={!this.props.openMenu}
+
+          
+          style={this.props.openMenu? styles.AppBarOpen :  styles.AppBar}
+          
+          onLeftIconButtonTouchTap={this.props.updateDrawerOpenStatus}
+          
+          onRightIconButtonTouchTap={this.logOut}             
+          iconElementRight={
+            /* TODO Colocar efeito no click */
+              <IconButton
+                  iconStyle={styles.ActionExitToApp}
+                  style={styles.IconButton}
+                  tooltip="Sair"
+                  tooltipPosition="bottom-left">
+                  <ActionExitToAppIcon />
+              </IconButton>}
+          />
+      )
+  }
 }
 
+
+/********** Start Side Menu **********/
+class SideMenu extends Component{
+  constructor(props){
+    super(props)
+  }
+  render(){
+    return(
+      <Drawer open={this.props.openMenu?true:this.props.drawerOpen}
+      docked={this.props.openMenu}
+      onRequestChange={this.props.updateDrawerOpenStatus}>
+      <MenuListSelectable />
+      </Drawer>
+    )
+  }
+}
 
 
 let SelectableList = makeSelectable(List);
@@ -355,4 +404,4 @@ class  MenuListSelectable extends Component{
     }
   }
 
-export default MenuBox;
+

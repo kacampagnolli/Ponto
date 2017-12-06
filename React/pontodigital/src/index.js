@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter,Switch,Route} from 'react-router-dom'
 
-import {cyan500} from 'material-ui/styles/colors';
+import {cyan500, black} from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
@@ -19,6 +19,9 @@ const muiTheme = getMuiTheme({
     appBar: {
       height: 55.59,
     },
+    textField : {
+      textColor : black
+    }
 
   });
 
