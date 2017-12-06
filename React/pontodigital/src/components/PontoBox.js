@@ -44,7 +44,7 @@ class PontoBox extends Component{
                 <MenuBox {...this.state} {...this.props} updateOpenMenuTrue={this.updateOpenMenuTrue}/>
                <div style={styles.divCenter}>
                     <Route  path={this.props.match.url + "/configuracoes/usuarios"} component={User}/>
-                    <Route exact path={this.props.match.url + "/configuracoes/categorias"} component={FormCategory}/>
+                    <Route  path={this.props.match.url + "/configuracoes/categorias"} component={FormCategory}/>
                 </div>
             </div>
             </Router> 

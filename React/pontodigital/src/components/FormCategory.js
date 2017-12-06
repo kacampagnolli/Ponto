@@ -15,7 +15,7 @@ import IconButton from 'material-ui/IconButton';
 import Clear from 'material-ui/svg-icons/content/clear';
 import Create from 'material-ui/svg-icons/content/create';
 import GroupAdd from 'material-ui/svg-icons/social/group-add';
-import Stepper from './Stepper.js';
+import NewCategory from './NewCategory.js';
 import MenuBox from './MenuBox.js';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
@@ -129,7 +129,7 @@ export default class FormCategory extends Component{
         <Router history={this.props.history}>
                <div style={{display:'flex',justifyContent:'center',alignItems:'center',padding:'3%'}}>
                 <Route exact path={"/ponto/configuracoes/categorias"} component={Category}/>
-                <Route exact path={"/ponto/configuracoes/usuarios/usuario"} component={Stepper}/>
+                <Route exact path={"/ponto/configuracoes/categorias/categoria"} component={NewCategory}/>
               </div>
         </Router>
     );
@@ -174,7 +174,7 @@ class Category extends Component {
 
   novo (e) {
     e.preventDefault();
-    this.props.history.push('/ponto/configuracoes/usuarios/usuario');
+    this.props.history.push('/ponto/configuracoes/categorias/categoria');
 
   };
 
