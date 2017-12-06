@@ -47,9 +47,11 @@ const styles = {
         paddingTop:'2%',
         height: 200,
         overflowY: 'auto',
+        width:'100%'
       },
       checkbox: {
         marginBottom: 16,
+        width:30,
       },
       iconStyles: {
         paddingTop:40,
@@ -69,7 +71,17 @@ const styles = {
         width:36,
         height: 36,
       },
-};
+      block: {
+          display:'flex',
+    
+      },
+      block2: {
+        marginTop: 10,
+        width:'30%',
+        display:'flex',
+        justifyContent:'center'
+      },
+    };
 
 class FormCard extends Component {
     constructor(props) {
@@ -90,26 +102,60 @@ class FormCard extends Component {
                     style={styles.gridList}
                 >
                 <GridTile>
+                <div style={styles.block}>
+          <div style={styles.block2}>
+            Equipe
+            </div>
+          <div style={styles.block2}>
+             Membro
+        
+            
+          </div>
+          <div style={styles.block2}>
+            Responsável
+        
+            
+          </div>
+          </div>
+          <div style={styles.block}>
+          <div style={styles.block2}>
+            Jaque
+            </div>
+          <div style={styles.block2}>
                 <Checkbox
-          label="Label on the left"
-          labelPosition="left"
+ 
           style={styles.checkbox}
         />
+            
+          </div>
+          <div style={styles.block2}>
         <Checkbox
-          label="Label on the left"
-          labelPosition="left"
+
           style={styles.checkbox}
         />
+            
+          </div>
+          </div>
+          <div style={styles.block}>
+          <div style={styles.block2}>
+            AB
+            </div>
+          <div style={styles.block2}>
+                <Checkbox
+         
+          style={styles.checkbox}
+        />
+            
+          </div>
+          <div style={styles.block2}>
         <Checkbox
-          label="Label on the left"
-          labelPosition="left"
+
           style={styles.checkbox}
         />
-        <Checkbox
-          label="Label on the left"
-          labelPosition="left"
-          style={styles.checkbox}
-        />
+            
+          </div>
+          </div>
+        
  
                 </GridTile>
                 </GridList>
