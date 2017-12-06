@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Switch,Route,Router} from 'react-router-dom'
 
 import User from './User.js'
-import Category from './Category.js'
+import FormCategory from './FormCategory.js'
 import MenuBox from './MenuBox.js'
 
 
@@ -44,7 +44,7 @@ class PontoBox extends Component{
                 <MenuBox {...this.state} {...this.props} updateOpenMenuTrue={this.updateOpenMenuTrue}/>
                <div style={styles.divCenter}>
                     <Route  path={this.props.match.url + "/configuracoes/usuarios"} component={User}/>
-                    <Route exact path={this.props.match.url + "/configuracoes/categorias"} component={Category}/>
+                    <Route exact path={this.props.match.url + "/configuracoes/categorias"} component={FormCategory}/>
                 </div>
             </div>
             </Router> 
