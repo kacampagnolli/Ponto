@@ -20,6 +20,81 @@ import MenuBox from './MenuBox.js';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton'
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+import Search from 'material-ui/svg-icons/action/search';
+import Divider from 'material-ui/Divider';
+
+
+class SearchUser extends Component
+{
+
+  constructor(props){
+    super(props);
+    this.state = {value: 1};
+  }
+
+  search(e){
+    e.preventDefault();
+
+  }
+
+  render()
+  {
+    return(
+     
+      <form onSubmit={this.search.bind(this)}>
+       <div style={{display:'flex',  justifyContent:'space-between'}}>
+      
+          <TextField floatingLabelText="Usuário"
+                    errorText=""
+                    type="text"
+          />
+          <SelectField
+          floatingLabelText="Categoria"
+          value={this.state.value}
+          onChange={this.handleChange}
+          style={styles.customWidth}
+        >
+          <MenuItem value={1} primaryText="Funcionario" />
+          <MenuItem value={2} primaryText="Recurso" />
+          <MenuItem value={3} primaryText="Deus" />
+          <MenuItem value={4} primaryText="Matuzalem" />
+          <MenuItem value={5} primaryText="PROC" />
+        </SelectField>
+         <SelectField
+          floatingLabelText="Equipe"
+          value={this.state.value}
+          onChange={this.handleChange}
+          style={styles.customWidth2}
+        >
+          <MenuItem value={1} primaryText="AC" />
+          <MenuItem value={2} primaryText="EB" />
+          <MenuItem value={3} primaryText="FAB" />
+          <MenuItem value={4} primaryText="FN" />
+          <MenuItem value={5} primaryText="CV" />
+        </SelectField>
+        <SelectField
+          floatingLabelText="Status"
+          value={this.state.value}
+          onChange={this.handleChange}
+          style={styles.customWidth2}
+        >
+          <MenuItem value={1} primaryText="Ativo" />
+          <MenuItem value={2} primaryText="Inativo" />
+        </SelectField>
+        <IconButton
+            iconStyle={styles.mediumIcon}
+            style={styles.medium}
+            type="subimit"
+        >
+            <Search />
+        </IconButton>
+        </div>
+      </form>
+    );
+  }
+}
 
 const styles = {
   propContainer: {
@@ -32,7 +107,13 @@ const styles = {
   },
   divTable:{
     maxWidth:800,
-  }
+  },
+  customWidth: {
+    width: 170
+  },
+  customWidth2: {
+    width: 95
+  },
 };
 
 const tableData = [
@@ -83,7 +164,7 @@ export default class UserBox extends Component{
                 <Route exact path={"/ponto/configuracoes/usuarios"} component={User}/>
                 <Route exact path={"/ponto/configuracoes/usuarios/usuario"} component={Stepper}/>
               </div>
-        </Router> 
+        </Router>
     );
 }
 }
@@ -166,7 +247,12 @@ class User extends Component {
       />,
     ];
     return (
+
+
       <div>
+     
+      <SearchUser />
+      <Divider style={{marginTop:10,marginBottom:10}} />
       <Dialog
       title="Excluir"
       actions={actions}
