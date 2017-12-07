@@ -499,7 +499,7 @@ class  ActionMenuBase extends Component{
           <IconButton style={{position : 'fixed', bottom: 106, right: 8}} onClick={this.openCloseDrawerActionMenuBase.bind(this)}>
           <CodeIcon />
         </IconButton>
-        <div style={{width: 263, marginLeft: 12, height: 220, borderStyle: 'solid', borderWidth: 5, bottom : 16, position: 'fixed' }}>
+        <div style={{width: 263, marginLeft: 12, height: 220, bottom : 16, position: 'fixed' }}>
           {this.props.children}
         </div>
         </Drawer>
@@ -515,21 +515,31 @@ class  CalendarioActionMenu extends Component{
   render(){
     return(
       <ActionMenuBase {...this.props}>
-      <AccessTimeIcon/>
-      <h5>Hoje, Sexta-Feira 03/03 de 2017</h5>
-      <TextField style={{width : 20}}
+      <div style={{textAlign:'center'}}>
+      <div style={{display:'flex', flexFlow:'row', justifyContent:'center', margin:20, alignItems:'center'}}>
+      <AccessTimeIcon style={{paddingRight:10}}/>
+      <div style={{lineHeight:1.5}}>
+      <p style={{margin:0}}>Hoje, Sexta-Feira</p> 
+      <p style={{margin:0}}>03/03 de 2017</p>
+      </div>
+      </div>
+      <div style={{display:'flex', flexFlow:'row', justifyContent:'center', margin:20, alignItems:'center'}}>
+      <TextField style={{width : 20, marginRight:10}}
       defaultValue="12"/>
-      <h5>:</h5>
-      <TextField style={{width : 20}}
+      <p style={{margin:0}}>:</p>
+      <TextField style={{width : 20,marginLeft:10}}
       defaultValue="35"/>
-      
+      </div>      
+      <div style={{display:'flex', flexFlow:'row', justifyContent:'center', margin:20, alignItems:'center'}}>
       <RaisedButton label="Entrar"
                     type="submit" 
                     backgroundColor="#3F51B5"
                     labelColor="#FFFFFF"
                 />
 
-      <CreateIcon/>
+      <CreateIcon style={{marginLeft:10}}/>
+      </div>
+      </div>
       </ActionMenuBase>
       
     )
