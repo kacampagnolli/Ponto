@@ -16,6 +16,7 @@ import FormatListBulletedIcon from 'material-ui/svg-icons/editor/format-list-bul
 import NotificationsActiveIcon from 'material-ui/svg-icons/social/notifications-active';
 import KeyBoardArrowDownIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
 import KeyBoardArrowUpIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-up';
+import AccessTimeIcon  from 'material-ui/svg-icons/device/access-time';
 import Equalizer from 'material-ui/svg-icons/av/equalizer'
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
@@ -34,6 +35,8 @@ import Menu from 'material-ui/Menu';
 import Divider from 'material-ui/Divider';
 import AutoComplete from 'material-ui/AutoComplete';
 import {Switch,Route,Router} from 'react-router-dom'
+import RaisedButton from 'material-ui/RaisedButton';
+import CreateIcon from 'material-ui/svg-icons/content/create';
 
 const persons = [
   'Leonardo', 'Leo', 'Kaue',
@@ -301,7 +304,19 @@ class TopMenu extends Component{
 class SideMenu extends Component{
   constructor(props){
     super(props)
+    this.state = {itemConfiguracoesOpen : false}
+    this.changeItemConfiguracoesOpen = this.changeItemConfiguracoesOpen.bind(this)
   }
+  changeItemConfiguracoesOpen(){
+
+    {/* TODO verificar */}
+    //  this.setState((prevState, props) => ({
+    //    itemConfiguracoesOpen: !prevState.itemConfiguracoesOpen
+    //  }));
+    
+    this.setState( {itemConfiguracoesOpen : !this.state.itemConfiguracoesOpen});
+    }
+
   render(){
     return(
       <div>
@@ -311,9 +326,9 @@ class SideMenu extends Component{
       containerStyle={styles.ContainerStyleDrawer}
       >
       
-      <MenuListSelectable  history={this.props.history} />
+      <MenuListSelectable  history={this.props.history} {...this.state} changeItemConfiguracoesOpen={this.changeItemConfiguracoesOpen} />
       </Drawer>
-      <ActionDivMenu {...this.props}/>
+      <ActionDivMenu {...this.props} {...this.state}/>
       </div>
     )
   }
@@ -360,11 +375,9 @@ SelectableList = wrapState(SelectableList);
 class  MenuListSelectable extends Component{
     constructor(props){
       super(props)
-      this.state = {itemConfiguracoesOpen : false}
+      
     }
-    changeItemConfiguracoesOpen(){
-      this.setState( {itemConfiguracoesOpen : !this.state.itemConfiguracoesOpen});
-      }
+    
     logoClick(){
       this.props.history.push('/ponto')
     }
@@ -396,13 +409,13 @@ class  MenuListSelectable extends Component{
       <ListItem
         primaryText="Configurações"
         leftIcon={<SettingsIcon/>}
-        onClick={this.changeItemConfiguracoesOpen.bind(this)}
-        open={this.state.itemConfiguracoesOpen}
+        onClick={this.props.changeItemConfiguracoesOpen}
+        open={this.props.itemConfiguracoesOpen}
         isKeyboardFocused={true}
         rightIcon={
-          this.state.itemConfiguracoesOpen? 
-           <KeyBoardArrowUpIcon onClick={this.changeItemConfiguracoesOpen.bind(this)}/>
-          :<KeyBoardArrowDownIcon onClick={this.changeItemConfiguracoesOpen.bind(this)}/>
+          this.props.itemConfiguracoesOpen? 
+           <KeyBoardArrowUpIcon onClick={this.props.changeItemConfiguracoesOpen}/>
+          :<KeyBoardArrowDownIcon onClick={this.props.changeItemConfiguracoesOpen}/>
         }
         nestedItems={[
             <ListItem
@@ -463,10 +476,15 @@ class  ActionMenuBase extends Component{
     if(nextProps.openMenu == true && this.props.openMenu == false){
       this.setState({DrawerActionMenuBase : true})
     }
+
+    if(nextProps.itemConfiguracoesOpen == true && this.props.itemConfiguracoesOpen == false){
+      this.setState({DrawerActionMenuBase : false})
+    }
   }
   render(){
     return(
       <div >
+        {/* Arrumar imgs*/}
         <Drawer open={this.state.DrawerActionMenuBase}
         containerStyle={{width: 370 , height : 320, 
           boxShadow: 'unset', top:'auto', 
@@ -477,24 +495,14 @@ class  ActionMenuBase extends Component{
           backgroundPosition: '-82px 30px'
         }}
         style={{width:'100%' , }}>
-          <img style={{ position: 'fixed', width: 420, height: 420, marginLeft : -65, marginTop : -10 }}src={Circulo}  alt="Circulo"/>
+          <img style={{ position: 'fixed', width: 440, height: 420, marginLeft : -70, marginTop : -10 }}src={Circulo}  alt="Circulo"/>
           <IconButton style={{position : 'fixed', bottom: 106, right: 8}} onClick={this.openCloseDrawerActionMenuBase.bind(this)}>
           <CodeIcon />
         </IconButton>
-        <div>
-
+        <div style={{width: 263, marginLeft: 12, height: 220, borderStyle: 'solid', borderWidth: 5, bottom : 16, position: 'fixed' }}>
+          {this.props.children}
         </div>
         </Drawer>
-        
-      {/* Arrumar imgs
-        <img style={{ position: 'fixed', width: 460, height: 350, marginLeft : -90, marginTop : 20 }}src={Hexagon}  alt="Circulo"/>
-        <img style={{ position: 'fixed', width: 420, height: 420, marginLeft : -60, marginTop : -10 }}src={Circulo}  alt="Circulo"/>
-        <div style={{ position: 'absolute', bottom: '30%', right: 0}}>
-        <IconButton >
-          <CodeIcon />
-        </IconButton>
-        </div>
-        {this.props.children}*/}
       </div>
     )
   }
@@ -507,8 +515,23 @@ class  CalendarioActionMenu extends Component{
   render(){
     return(
       <ActionMenuBase {...this.props}>
-      <h1></h1>
+      <AccessTimeIcon/>
+      <h5>Hoje, Sexta-Feira 03/03 de 2017</h5>
+      <TextField style={{width : 20}}
+      defaultValue="12"/>
+      <h5>:</h5>
+      <TextField style={{width : 20}}
+      defaultValue="35"/>
+      
+      <RaisedButton label="Entrar"
+                    type="submit" 
+                    backgroundColor="#3F51B5"
+                    labelColor="#FFFFFF"
+                />
+
+      <CreateIcon/>
       </ActionMenuBase>
+      
     )
   }
 }
