@@ -3,6 +3,7 @@ import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import ActionExitToAppIcon  from 'material-ui/svg-icons/action/exit-to-app';
 import TodayIcon  from 'material-ui/svg-icons/action/today';
+import CodeIcon  from 'material-ui/svg-icons/action/code';
 import DescriptionIcon  from 'material-ui/svg-icons/action/description';
 import SettingsIcon  from 'material-ui/svg-icons/action/settings';
 import AlertErrorOutLineIcon  from 'material-ui/svg-icons/alert/error-outline';
@@ -20,7 +21,9 @@ import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import {List, ListItem, makeSelectable} from 'material-ui/List';
 import PropTypes from 'prop-types';
-import logo from 'statics/img/logo_autbank.jpg';
+import Logo from 'statics/img/logo_autbank.jpg';
+import Circulo from 'statics/img/circulo.png'
+import Hexagon from 'statics/img/hexagon.png'
 import TextField from 'material-ui/TextField';
 import Badge from 'material-ui/Badge';
 import {black, redA700, white} from 'material-ui/styles/colors';
@@ -138,6 +141,9 @@ const styles={
     marginLeft: 50,
     width : 350
   },
+  ContainerStyleDrawer : {
+    overflow: 'unset' 
+  }
 }
 
 export default  class  MenuBox extends Component{
@@ -298,14 +304,17 @@ class SideMenu extends Component{
   }
   render(){
     return(
+      <div>
       <Drawer open={this.props.openMenu?true:this.props.drawerOpen}
       docked={this.props.openMenu}
       onRequestChange={this.props.updateDrawerOpenStatus}
+      containerStyle={styles.ContainerStyleDrawer}
       >
       
       <MenuListSelectable  history={this.props.history} />
-      <ActionDivMenu history={this.props.history}/>
       </Drawer>
+      <ActionDivMenu {...this.props}/>
+      </div>
     )
   }
 }
@@ -363,7 +372,7 @@ class  MenuListSelectable extends Component{
       return(
   <SelectableList defaultValue={1}>
         <Subheader style={styles.Subheader}>
-            <img src={logo} onClick={this.logoClick.bind(this)} alt="Logo"/>
+            <img src={Logo} onClick={this.logoClick.bind(this)} alt="Logo"/>
         </Subheader>
       <ListItem
         value={1}
@@ -428,8 +437,8 @@ class  MenuListSelectable extends Component{
     render(){
       return(
         <Router history={this.props.history}>
-        <div style ={{position: 'relative', bottom: 0, left:0, }}>
-          <Route exact path={"/ponto/calendario"} component={CalendarioActionMenu}/>
+        <div>
+          <Route exact path={"/ponto/calendario"} render={(props) => ( <CalendarioActionMenu {...this.props}/> )} />
           <Route exact path={"/ponto/resumo"} component={ResumoActionMenu}/>
         </div>
         </Router> 
@@ -440,11 +449,52 @@ class  MenuListSelectable extends Component{
 class  ActionMenuBase extends Component{
   constructor(props){
     super(props)
+    this.state ={DrawerActionMenuBase : true}
+  }
+  openCloseDrawerActionMenuBase(){
+    this.setState((prevState) => ({
+      DrawerActionMenuBase: !prevState.DrawerActionMenuBase
+    }));
+  }
+  componentWillReceiveProps(nextProps){
+    if(nextProps.openMenu == false && this.props.openMenu == true){
+      this.setState({DrawerActionMenuBase : false})
+    }
+    if(nextProps.openMenu == true && this.props.openMenu == false){
+      this.setState({DrawerActionMenuBase : true})
+    }
   }
   render(){
     return(
-      <div style ={{bottom: 0, left: 0}}>
-        {this.props.children}
+      <div >
+        <Drawer open={this.state.DrawerActionMenuBase}
+        containerStyle={{width: 370 , height : 320, 
+          boxShadow: 'unset', top:'auto', 
+          bottom: 0,backgroundColor :'rgba(255, 255, 255, 0)',
+          backgroundImage: `url(${Hexagon})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: '450px 320px',
+          backgroundPosition: '-82px 30px'
+        }}
+        style={{width:'100%' , }}>
+          <img style={{ position: 'fixed', width: 420, height: 420, marginLeft : -65, marginTop : -10 }}src={Circulo}  alt="Circulo"/>
+          <IconButton style={{position : 'fixed', bottom: 106, right: 8}} onClick={this.openCloseDrawerActionMenuBase.bind(this)}>
+          <CodeIcon />
+        </IconButton>
+        <div>
+
+        </div>
+        </Drawer>
+        
+      {/* Arrumar imgs
+        <img style={{ position: 'fixed', width: 460, height: 350, marginLeft : -90, marginTop : 20 }}src={Hexagon}  alt="Circulo"/>
+        <img style={{ position: 'fixed', width: 420, height: 420, marginLeft : -60, marginTop : -10 }}src={Circulo}  alt="Circulo"/>
+        <div style={{ position: 'absolute', bottom: '30%', right: 0}}>
+        <IconButton >
+          <CodeIcon />
+        </IconButton>
+        </div>
+        {this.props.children}*/}
       </div>
     )
   }
@@ -456,7 +506,7 @@ class  CalendarioActionMenu extends Component{
   }
   render(){
     return(
-      <ActionMenuBase>
+      <ActionMenuBase {...this.props}>
       <h1></h1>
       </ActionMenuBase>
     )
@@ -469,7 +519,7 @@ class  ResumoActionMenu extends Component{
   render(){
     return(
       <ActionMenuBase>
-      <h1></h1>
+      <h1>bb</h1>
       </ActionMenuBase>
     )
   }
