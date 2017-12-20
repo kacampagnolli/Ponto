@@ -549,7 +549,7 @@ class  MenuListSelectable extends Component{
         <Router history={this.props.history}>
         <div>
           <Route exact path={"/ponto/calendario"} render={(props) => ( <CalendarioActionMenu {...this.props}/> )} />
-          <Route exact path={"/ponto/resumo"} component={ResumoActionMenu}/>
+          <Route exact path={"/ponto/resumo"} render={(props) => ( <ResumoActionMenu {...this.props}/> )} />
         </div>
         </Router> 
       )
@@ -642,7 +642,7 @@ class  ResumoActionMenu extends Component{
   }
   render(){
     return(
-      <ActionMenuBase>
+      <ActionMenuBase {...this.props}>
         <div style= {styles.ResumoActionMenuDiv }>
           <div style={styles.ResumoActionMenuDivDesc}>
             <AccessTimeIcon style={styles.ResumoActionMenuDivTimeIcon}/>
