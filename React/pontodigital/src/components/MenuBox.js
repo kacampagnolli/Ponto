@@ -233,10 +233,19 @@ const styles={
     alignItems:'center'
   },
   ResumoActionMenuDivPTag : {
-    marginRight : 15
+    marginRight : 15,
+    marginTop : 0,
+    marginLeft : 0,
+    marginBottom : 0
   },
-  
-
+  ResumoActionMenuDivTimeIcon : {
+    paddingRight : 10
+  },
+  ResumoActionMenuDivDesc : {
+    display: 'flex', 
+    alignItems : 'center', 
+    justifyContent : 'center'
+  },
 }
 
 export default  class  MenuBox extends Component{
@@ -635,6 +644,10 @@ class  ResumoActionMenu extends Component{
     return(
       <ActionMenuBase>
         <div style= {styles.ResumoActionMenuDiv }>
+          <div style={styles.ResumoActionMenuDivDesc}>
+            <AccessTimeIcon style={styles.ResumoActionMenuDivTimeIcon}/>
+            <p style={styles.ResumoActionMenuDivPTag}>Intervalo</p> 
+          </div>
           <div style={styles.ResumoActionMenuDivField}>
             <p style={styles.ResumoActionMenuDivPTag}>De</p> 
             <DatePicker  textFieldStyle={{width : 85}}  container="inline" autoOk={true} id={"initialDateResumo"}/>
