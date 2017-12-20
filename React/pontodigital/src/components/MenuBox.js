@@ -37,6 +37,8 @@ import AutoComplete from 'material-ui/AutoComplete';
 import {Switch,Route,Router} from 'react-router-dom'
 import RaisedButton from 'material-ui/RaisedButton';
 import CreateIcon from 'material-ui/svg-icons/content/create';
+import TimePicker from 'material-ui/TimePicker';
+import DatePicker from 'material-ui/DatePicker';
 
 const persons = [
   'Leonardo', 'Leo', 'Kaue',
@@ -146,7 +148,95 @@ const styles={
   },
   ContainerStyleDrawer : {
     overflow: 'unset' 
-  }
+  },
+  DrawerActionMenuBase : { 
+    width: 370 , 
+    height : 320, 
+    boxShadow: 'unset', 
+    top:'auto', 
+    bottom: 0, 
+    backgroundColor :'rgba(255, 255, 255, 0)',
+    backgroundImage: `url(${Hexagon})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: '450px 320px',
+    backgroundPosition: '-82px 30px'
+  },
+  IconButtonOpenCloseDrawerActionMenuBase:{
+    position : 'fixed', 
+    bottom: 106, 
+    right: 8
+  },
+  DivDrawerActionMenuBase :{
+    width: 263, 
+    marginLeft: 12, 
+    height: 220, 
+    bottom : 25, 
+    position: 'fixed' 
+  },
+  CalendarioActionMenuDiv : {
+    display: 'flex', 
+    flexFlow: 'column', 
+    justifyContent : 'space-around', 
+    height: '100%', 
+    alignItems : 'center' 
+  },
+  CalendarioActionMenuDivTimeIcon : {
+    paddingRight : 10
+  },
+  CalendarioActionMenuDivText :{
+    display : 'flex' , 
+    flexFlow: 'column', 
+    alignItems: 'center', 
+    lineHeight:1.5
+  },
+  CalendarioActionMenuDivDesc : {
+    display : 'flex',
+    alignItems : 'center'
+  },
+  CalendarioActionMenuDivPTag :{
+    margin:0
+  },
+  CalendarioActionMenuDivTextFields :{
+    display:'flex', 
+    flexFlow:'row', 
+    justifyContent:'center', 
+    alignItems:'center'
+  },
+  CalendarioActionMenuDivTextFieldRight :{
+    width : 20, 
+    marginRight:10
+  },
+  CalendarioActionMenuDivTextFieldLeft : {
+    width : 20,
+    marginLeft : 10
+  },
+  CalendarioActionMenuDivAction : {
+    display:'flex', 
+    flexFlow:'row', 
+    justifyContent:'center', 
+    alignItems:'center'
+  },
+  CalendarioActionMenuDivCreateIcon :{
+    marginLeft:10
+  },
+  ResumoActionMenuDiv : {
+  display: 'flex', 
+  flexFlow : 'column', 
+  alignItems: 'center', 
+  height: '100%', 
+  justifyContent: 'space-around' 
+},
+  ResumoActionMenuDivField :{
+    display:'flex', 
+    flexFlow:'row', 
+    justifyContent:'center', 
+    alignItems:'center'
+  },
+  ResumoActionMenuDivPTag : {
+    marginRight : 15
+  },
+  
+
 }
 
 export default  class  MenuBox extends Component{
@@ -166,7 +256,6 @@ export default  class  MenuBox extends Component{
           <div>
           <TopMenu {...this.state} {...this.props} updateDrawerOpenStatus={this.updateDrawerOpenStatus} />
           <SideMenu {...this.state} {...this.props} updateDrawerOpenStatus={this.updateDrawerOpenStatus}/>
-
           </div>
       );
     }
@@ -360,10 +449,8 @@ function wrapState(ComposedComponent) {
       return (
         <ComposedComponent
           value={this.state.selectedIndex}
-          onChange={this.handleRequestChange}
-        >
+          onChange={this.handleRequestChange}>
           {this.props.children}
-         
         </ComposedComponent>
       );
     }
@@ -484,22 +571,14 @@ class  ActionMenuBase extends Component{
   render(){
     return(
       <div >
-        {/* Arrumar imgs*/}
         <Drawer open={this.state.DrawerActionMenuBase}
-        containerStyle={{width: 370 , height : 320, 
-          boxShadow: 'unset', top:'auto', 
-          bottom: 0,backgroundColor :'rgba(255, 255, 255, 0)',
-          backgroundImage: `url(${Hexagon})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: '450px 320px',
-          backgroundPosition: '-82px 30px'
-        }}
-        style={{width:'100%' , }}>
-          <img style={{ position: 'fixed', width: 440, height: 420, marginLeft : -70, marginTop : -10 }}src={Circulo}  alt="Circulo"/>
-          <IconButton style={{position : 'fixed', bottom: 106, right: 8}} onClick={this.openCloseDrawerActionMenuBase.bind(this)}>
-          <CodeIcon />
-        </IconButton>
-        <div style={{width: 263, marginLeft: 12, height: 220, bottom : 16, position: 'fixed' }}>
+        containerStyle={styles.DrawerActionMenuBase}>
+        {/* Arrumar imgs*/}
+            <img style={{ position: 'fixed', width: 440, height: 420, marginLeft : -70, marginTop : -10 }}src={Circulo}  alt="Circulo"/>
+          <IconButton style={styles.IconButtonOpenCloseDrawerActionMenuBase} onClick={this.openCloseDrawerActionMenuBase.bind(this)}>
+            <CodeIcon />
+          </IconButton>
+        <div style={styles.DivDrawerActionMenuBase}>
           {this.props.children}
         </div>
         </Drawer>
@@ -515,31 +594,34 @@ class  CalendarioActionMenu extends Component{
   render(){
     return(
       <ActionMenuBase {...this.props}>
-      <div style={{textAlign:'center'}}>
-      <div style={{display:'flex', flexFlow:'row', justifyContent:'center', margin:20, alignItems:'center'}}>
-      <AccessTimeIcon style={{paddingRight:10}}/>
-      <div style={{lineHeight:1.5}}>
-      <p style={{margin:0}}>Hoje, Sexta-Feira</p> 
-      <p style={{margin:0}}>03/03 de 2017</p>
-      </div>
-      </div>
-      <div style={{display:'flex', flexFlow:'row', justifyContent:'center', margin:20, alignItems:'center'}}>
-      <TextField style={{width : 20, marginRight:10}}
-      defaultValue="12"/>
-      <p style={{margin:0}}>:</p>
-      <TextField style={{width : 20,marginLeft:10}}
-      defaultValue="35"/>
-      </div>      
-      <div style={{display:'flex', flexFlow:'row', justifyContent:'center', margin:20, alignItems:'center'}}>
-      <RaisedButton label="Entrar"
-                    type="submit" 
-                    backgroundColor="#3F51B5"
-                    labelColor="#FFFFFF"
-                />
-
-      <CreateIcon style={{marginLeft:10}}/>
-      </div>
-      </div>
+        <div style= {styles.CalendarioActionMenuDiv }>
+          <div style={styles.CalendarioActionMenuDivDesc}>
+            <AccessTimeIcon style={styles.CalendarioActionMenuDivTimeIcon}/>
+            <div style={styles.CalendarioActionMenuDivText}>
+              <p style={styles.CalendarioActionMenuDivPTag}>Hoje, Sexta-Feira</p> 
+              <p style={styles.CalendarioActionMenuDivPTag}>03/03 de 2017</p>
+            </div>
+          </div>
+          <div style={styles.CalendarioActionMenuDivTextFields}>
+          <TimePicker
+            autoOk={true}
+            /*TODO defaultTime={new Date(2007, 11, 5, 8, 23, 17)*/
+            fullWidth={true}
+            format="24hr"
+            value={10}
+            minutesStep={5}
+            style={{width: 40}}           
+          />
+          </div>      
+          <div style={styles.CalendarioActionMenuDivAction}>
+            <RaisedButton label="Entrar"
+                          type="submit" 
+                          backgroundColor="#3F51B5"
+                          labelColor="#FFFFFF"
+                      />
+            <CreateIcon style={styles.CalendarioActionMenuDivCreateIcon}/>
+          </div>
+        </div>
       </ActionMenuBase>
       
     )
@@ -552,7 +634,22 @@ class  ResumoActionMenu extends Component{
   render(){
     return(
       <ActionMenuBase>
-      <h1>bb</h1>
+        <div style= {styles.ResumoActionMenuDiv }>
+          <div style={styles.ResumoActionMenuDivField}>
+            <p style={styles.ResumoActionMenuDivPTag}>De</p> 
+            <DatePicker  textFieldStyle={{width : 85}}  container="inline" autoOk={true} />
+          </div>
+          <div style={styles.ResumoActionMenuDivField}>
+            <p style={styles.ResumoActionMenuDivPTag}>Até</p> 
+            <DatePicker  textFieldStyle={{width : 85}}  container="inline" autoOk={true} />
+          </div>
+          <div >
+              <RaisedButton label="Resumir"
+                            type="submit" 
+                            backgroundColor="#3F51B5"
+                            labelColor="#FFFFFF"/>
+          </div>
+        </div>
       </ActionMenuBase>
     )
   }
