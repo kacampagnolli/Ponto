@@ -44,7 +44,7 @@ class SearchCategory extends Component
     return(
      
       <form onSubmit={this.search.bind(this)}>
-       <div style={{display:'flex'}}>
+       <div>
       
           <TextField floatingLabelText="Categoria"
                     errorText=""
@@ -127,7 +127,7 @@ export default class FormCategory extends Component{
   render(){
     return(
         <Router history={this.props.history}>
-               <div style={{display:'flex',justifyContent:'center',alignItems:'center',padding:'3%'}}>
+               <div>
                 <Route exact path={"/ponto/configuracoes/categorias"} component={Category}/>
                 <Route exact path={"/ponto/configuracoes/categorias/categoria"} component={NewCategory}/>
               </div>

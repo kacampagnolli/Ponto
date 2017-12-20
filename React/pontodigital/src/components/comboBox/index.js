@@ -26,9 +26,9 @@ export default class ComboBox extends React.Component{
                 style={this.typeCombo==="min"?styles.customWidth2:styles.customWidth}
             >
                 <Item value={1} text="Funcionario" />
-                <Item value={1} text="Funcionario" />
-                <Item value={1} text="Funcionario" />
-                <Item value={1} text="Funcionario" />
+                <Item value={2} text="Pedro" />
+                <Item value={3} text="Carlinhos" />
+                <Item value={4} text="Alberto" />
             </SelectField>
         );
     }

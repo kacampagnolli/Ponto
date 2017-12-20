@@ -5,6 +5,7 @@ import React from 'react';
 import ImputText from '../../components/inputText';
 import ComboBox from '../../components/comboBox';
 import {styles} from './styles'
+import Stepper from './userStepper';
 
 import {
   Table,
@@ -27,7 +28,6 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton'
 
-import Stepper from './userStepper';
 
 import Search from 'material-ui/svg-icons/action/search';
 import Divider from 'material-ui/Divider';
@@ -41,7 +41,7 @@ class SearchUser extends React.Component {
   }
 
   search(e){
-    e.preventDefault();
+   e.preventDefault();
   }
 
   render(){
@@ -107,8 +107,10 @@ export default class UserBox extends React.Component{
 
   render(){
     return(
-        <Router history={this.props.history}>
-               <div style={{display:'flex',justifyContent:'center',alignItems:'center',height:'100%',padding:'3%'}}>
+      <Router history={this.props.history}>
+               {//style={{display:'flex',justifyContent:'center',alignItems:'center',height:'100%'}}>
+               }
+               <div> 
                 <Route exact path={"/ponto/configuracoes/usuarios"} component={User}/>
                 <Route exact path={"/ponto/configuracoes/usuarios/usuario"} component={Stepper}/>
               </div>
@@ -118,7 +120,6 @@ export default class UserBox extends React.Component{
 }
 
 class User extends React.Component {
-
 
 
   state = {
@@ -135,25 +136,6 @@ class User extends React.Component {
     coments: [],
     open: false,
   };
-
-  componentWillMount(){
-    console.log("Aqui");
-    fetch('http://localhost:3000/comments', {
-      method: 'get'
-    }).then((response) => response.json())  
-      .then((responseJson) => {
-        this.setState({coments:responseJson});
-        const comentario = this.state.coments;
-        comentario.map((coment)=>{
-          console.log(coment.id);
-        });
-    }).catch(function(err) {
-      // Error :(
-    });
-
-
-
-  }
 
   novo (e) {
     e.preventDefault();

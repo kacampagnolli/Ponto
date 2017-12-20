@@ -25,6 +25,9 @@ const muiTheme = getMuiTheme({
       primary2Color:indigoA100,      
     
     },
+    appBar:{
+      height:56
+    },
     textField: {
       errorColor: red500,
       textColor: grey800,

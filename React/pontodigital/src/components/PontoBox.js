@@ -36,7 +36,8 @@ class PontoBox extends Component{
     render(){
         const styles ={
             divCenter:{
-                marginLeft:this.state.openMenu?'253px':0, height :'100%', display: 'flex'
+                marginLeft:this.state.openMenu?'256px':0, height :'100%', display: 'flex',
+                alignItems:'center', justifyContent:'center', padding:'2%'
             },
             divGeneral : {
                 height : '100%',display: 'flex', flexFlow : 'column'
@@ -51,8 +52,7 @@ class PontoBox extends Component{
                     <Route  path={this.props.match.url + "/configuracoes/usuarios"} component={UserBox}/>
                     <Route  path={this.props.match.url + "/configuracoes/categorias"} component={FormCategory}/>
                     <Route  path={this.props.match.url + "/configuracoes/equipes"} component={FormTeam}/>
-                    <Route  path={"/ponto/resumo"} component={ResumoBox}/>
-                    
+                    <Route  path={"/ponto/resumo"} component={ResumoBox}/> 
                 </div>
             </div>
             </Router> 

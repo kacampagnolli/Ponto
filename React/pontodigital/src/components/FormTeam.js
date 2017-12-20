@@ -127,7 +127,7 @@ export default class FormTeam extends Component{
   render(){
     return(
         <Router history={this.props.history}>
-               <div style={{display:'flex',justifyContent:'center',alignItems:'center',padding:'3%'}}>
+               <div>
                 <Route exact path={"/ponto/configuracoes/equipes"} component={Team}/>
                 <Route exact path={"/ponto/configuracoes/equipes/equipe"} component={NewTeam}/>
               </div>
