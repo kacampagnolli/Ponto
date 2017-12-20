@@ -36,13 +36,16 @@ class PontoBox extends Component{
     render(){
         const styles ={
             divCenter:{
-                marginLeft:this.state.openMenu?'253px':0,
+                marginLeft:this.state.openMenu?'253px':0, height :'100%', display: 'flex'
+            },
+            divGeneral : {
+                height : '100%',display: 'flex', flexFlow : 'column'
             }
         
         };
         return(
             <Router history={this.props.history}>
-                <div>
+                <div style={styles.divGeneral}>
                 <MenuBox {...this.state} {...this.props} updateOpenMenuTrue={this.updateOpenMenuTrue}/>
                <div style={styles.divCenter}>
                     <Route  path={this.props.match.url + "/configuracoes/usuarios"} component={UserBox}/>
