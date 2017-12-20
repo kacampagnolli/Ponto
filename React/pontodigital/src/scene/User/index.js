@@ -1,4 +1,11 @@
-import React, {Component} from 'react';
+//React
+import React from 'react';
+
+//Components
+import ImputText from '../../components/inputText';
+import ComboBox from '../../components/comboBox';
+import {styles} from './styles'
+
 import {
   Table,
   TableBody,
@@ -9,102 +16,53 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 import {Switch,Route,Router} from 'react-router-dom'
-import TextField from 'material-ui/TextField';
+
 import Toggle from 'material-ui/Toggle';
 import IconButton from 'material-ui/IconButton';
 import Clear from 'material-ui/svg-icons/content/clear';
 import Create from 'material-ui/svg-icons/content/create';
 import PersonAdd from 'material-ui/svg-icons/social/person-add';
-import Stepper from './Stepper.js';
-import MenuBox from './MenuBox.js';
+import MenuBox from '../../components/MenuBox.js';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton'
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
+
+import Stepper from './userStepper';
+
 import Search from 'material-ui/svg-icons/action/search';
 import Divider from 'material-ui/Divider';
 
 
-class SearchUser extends Component
-{
-
+class SearchUser extends React.Component {
   constructor(props){
     super(props);
     this.state = {value: 1};
+    this.search = this.search.bind(this);
   }
 
   search(e){
     e.preventDefault();
-
   }
 
-  render()
-  {
+  render(){
     return(
-     
-      <form onSubmit={this.search.bind(this)}>
-       <div style={{display:'flex', flexFlow:'row wrap', justifyContent:'space-between', alignItems:'center'}}>
-      
-          <TextField floatingLabelText="Usuário"
-                    errorText=""
-                    type="text"
-          />
-          <SelectField
-          floatingLabelText="Categoria"
-          value={this.state.value}
-          onChange={this.handleChange}
-          style={styles.customWidth}
-        >
-          <MenuItem value={1} primaryText="Funcionario" />
-          <MenuItem value={2} primaryText="Recurso" />
-          <MenuItem value={3} primaryText="Deus" />
-          <MenuItem value={4} primaryText="Matuzalem" />
-          <MenuItem value={5} primaryText="PROC" />
-        </SelectField>
-         <SelectField
-          floatingLabelText="Equipe"
-          value={this.state.value}
-          onChange={this.handleChange}
-          style={styles.customWidth2}
-        >
-          <MenuItem value={1} primaryText="AC" />
-          <MenuItem value={2} primaryText="EB" />
-          <MenuItem value={3} primaryText="FAB" />
-          <MenuItem value={4} primaryText="FN" />
-          <MenuItem value={5} primaryText="CV" />
-        </SelectField>
-        <SelectField
-          floatingLabelText="Status"
-          value={this.state.value}
-          onChange={this.handleChange}
-          style={styles.customWidth2}
-        >
-          <MenuItem value={1} primaryText="Ativo" />
-          <MenuItem value={2} primaryText="Inativo" />
-        </SelectField>
-        <IconButton
+      <form onSubmit={this.search}>
+        <div style={{display:'flex', flexFlow:'row wrap', justifyContent:'space-between', alignItems:'center'}}>
+          <ImputText typeForm="text" labelForm="Usuário" />
+          <ComboBox labelCombo="Categoria" valueCombo={this.state.value} onChangeCombo={this.handleChange} typeCombo="max"/>
+          <ComboBox labelCombo="Equipe" valueCombo={this.state.value} onChangeCombo={this.handleChange} typeCombo="min"/>
+          <ComboBox labelCombo="Satus" valueCombo={this.state.value} onChangeCombo={this.handleChange} typeCombo="min"/>
+          <IconButton
             type="subimit"
-        >
+          >
             <Search />
-        </IconButton>
+          </IconButton>
         </div>
       </form>
     );
   }
 }
 
-const styles = {
-  divTable:{
-    maxWidth:800,
-  },
-  customWidth: {
-    width: 170
-  },
-  customWidth2: {
-    width: 95
-  },
-};
 
 const tableData = [
   {
@@ -141,7 +99,7 @@ const tableData = [
  * A more complex example, allowing the table height to be set, and key boolean properties to be toggled.
  */
 
-export default class UserBox extends Component{
+export default class UserBox extends React.Component{
   constructor(props){
     super(props);
     console.log(props);
@@ -159,7 +117,7 @@ export default class UserBox extends Component{
 }
 }
 
-class User extends Component {
+class User extends React.Component {
 
 
 

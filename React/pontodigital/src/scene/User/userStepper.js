@@ -7,9 +7,9 @@ import {
   StepLabel,
 } from 'material-ui/Stepper';
 import ArrowForwardIcon from 'material-ui/svg-icons/navigation/arrow-forward';
-import SingUp from './SingUp.js'
-import Category from './Category'
-import Team from './Team.js'
+import SingUp from './formUser.js'
+import Category from './formCategory'
+import Team from './formTeam.js'
 /**
  * It is possible to specify your own step connector by passing an element to the `connector`
  * prop. If you want to remove the connector, pass `null` to the `connector` prop.

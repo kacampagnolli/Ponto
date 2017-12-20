@@ -1,4 +1,4 @@
-const styles = {
+export const styles = {
     div:{
         display:'flex',
         flexFlow:'row',

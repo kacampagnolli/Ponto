@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card, CardText} from 'material-ui/Card';
-import styles from './style';
+import {styles} from './style';
 
 export default class CardForm extends React.Component{
     constructor(props){

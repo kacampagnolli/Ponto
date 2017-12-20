@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CardForm from './card';
+import CardForm from '../../components/card';
 import TextField from 'material-ui/TextField';
 
 
