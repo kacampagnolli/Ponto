@@ -5,6 +5,7 @@ import User from './User.js'
 import FormCategory from './FormCategory.js'
 import FormTeam from './FormTeam.js'
 import MenuBox from './MenuBox.js'
+import ResumoBox from './ResumoBox.js'
 
 
 class PontoBox extends Component{
@@ -47,6 +48,8 @@ class PontoBox extends Component{
                     <Route  path={this.props.match.url + "/configuracoes/usuarios"} component={User}/>
                     <Route  path={this.props.match.url + "/configuracoes/categorias"} component={FormCategory}/>
                     <Route  path={this.props.match.url + "/configuracoes/equipes"} component={FormTeam}/>
+                    <Route  path={"/ponto/resumo"} component={ResumoBox}/>
+                    
                 </div>
             </div>
             </Router> 

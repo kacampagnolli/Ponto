@@ -358,6 +358,7 @@ class TopMenu extends Component{
               <div>
                  {/* TODO arrumar linha */}
                   <AutoComplete
+                  id={"findUsers"}
                   style={styles.AutoComplete}
                   fullWidth={true}
                   filter={AutoComplete.fuzzyFilter}
@@ -605,10 +606,9 @@ class  CalendarioActionMenu extends Component{
           <div style={styles.CalendarioActionMenuDivTextFields}>
           <TimePicker
             autoOk={true}
-            /*TODO defaultTime={new Date(2007, 11, 5, 8, 23, 17)*/
             fullWidth={true}
             format="24hr"
-            value={10}
+            id={"hourMinuteAction"}
             minutesStep={5}
             style={{width: 40}}           
           />
@@ -637,11 +637,11 @@ class  ResumoActionMenu extends Component{
         <div style= {styles.ResumoActionMenuDiv }>
           <div style={styles.ResumoActionMenuDivField}>
             <p style={styles.ResumoActionMenuDivPTag}>De</p> 
-            <DatePicker  textFieldStyle={{width : 85}}  container="inline" autoOk={true} />
+            <DatePicker  textFieldStyle={{width : 85}}  container="inline" autoOk={true} id={"initialDateResumo"}/>
           </div>
           <div style={styles.ResumoActionMenuDivField}>
             <p style={styles.ResumoActionMenuDivPTag}>Até</p> 
-            <DatePicker  textFieldStyle={{width : 85}}  container="inline" autoOk={true} />
+            <DatePicker  textFieldStyle={{width : 85}}  container="inline" autoOk={true} id={"finalDateResumo"}/>
           </div>
           <div >
               <RaisedButton label="Resumir"
