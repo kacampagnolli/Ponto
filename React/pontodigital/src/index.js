@@ -2,27 +2,41 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter,Switch,Route} from 'react-router-dom'
 
-import {cyan500, black} from 'material-ui/styles/colors';
+import {
+  indigo500, 
+  indigoA100,
+  grey800,
+  red500,
+  grey200
+} from 'material-ui/styles/colors';
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 //COMPONENTS
 import Login from './components/Login.js'
 import PontoBox from './components/PontoBox.js'
-import Stepper from './components/Stepper.js'
-import User from './components/User.js'
+
+
 
 const muiTheme = getMuiTheme({
     palette: {
-      textColor: cyan500,
+      primary1Color: indigo500,
+      primary2Color:indigoA100,      
+    
     },
-    appBar: {
-      height: 55.59,
+    textField: {
+      errorColor: red500,
+      textColor: grey800,
     },
-    textField : {
-      textColor : black
+    raisedButton:{
+      color:grey200,   
+      textColor:indigo500,
+    },
+    card:{
+      titleColor: indigo500,
     }
-
+    
   });
 
 

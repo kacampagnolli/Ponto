@@ -1,31 +1,25 @@
 import React, { Component } from 'react';
-import {Card, CardTitle, CardText,CardHeader} from 'material-ui/Card';
+import {Card, CardTitle, CardText} from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import Divider from 'material-ui/Divider';
 import logo from 'statics/img/logo_autbank.jpg';
 
-
-
 const styles = {
-    CardHeader:{
+    CardTitle:{
     backgroundColor: '#3F51B5',
     },
     div:{
-        paddingTop:'3%',
-        maxWidth:'400px',
-        minWidth:'300px',
-        margin: '0 auto',  
+        display:'flex',
+        flexFlow:'row',
+        alignItems:'center',
+        justifyContent:'center',
+        height:'100%'
     },
-    backGroundDiv:{
-        width: '100%',
-        backgroundColor:'red',
-    },
-    RaisedButton:{
-        paddingTop:'5%',
-        width:'100px',
-        alignSelf:'flex-end',
-        marginLeft:'auto',
+    footer:{
+      display:'flex',
+      flexFlow:'row wrap', 
+      justifyContent:'space-between',
+      alignItems:'center'
     },
     Link:{
         color:'#3F51B5',
@@ -34,7 +28,6 @@ const styles = {
 };
 
 class FormCard extends Component {
-
     constructor(props){
         super(props);
     }
@@ -57,8 +50,8 @@ class FormCard extends Component {
                     fullWidth={true}
                     type="password"
                 />
+                <div style={styles.footer}>
                 <a style={styles.Link} href="">Esqueceu sua Senha?</a>
-                <div style={styles.RaisedButton}>
                 <RaisedButton label="Login"
                     type="submit" 
                     backgroundColor="#3F51B5"
@@ -70,31 +63,29 @@ class FormCard extends Component {
     };
 };
 
-
 class LoginCard extends Component{
     constructor(props){
         super(props)
     }
 
     render(){
-    return(
-        <div style={styles.div}>
-            <Card style={styles.Card}>
-                <CardTitle style={styles.CardHeader}>
-                <img src={logo} style={styles.img} alt="Logo"/>
-                </CardTitle>
-                <CardTitle title="Login"
-                    titleColor="#000000" 
-                    subtitle="Bem-Vindo ao Ponto Digital"
-                    subtitleColor="#616161"
-                />
-                <CardText>
-                    <FormCard {...this.props}/>
-                </CardText>
-            </Card>
-        </div>
-
-);
+        return(
+            <div style={styles.div}>
+                <Card>
+                    <CardTitle style={styles.CardTitle}>
+                    <img src={logo} style={styles.img} alt="Logo"/>
+                    </CardTitle>
+                    <CardTitle title="Login"
+                        titleColor="#000000" 
+                        subtitle="Bem-Vindo ao Ponto Digital"
+                        subtitleColor="#616161"
+                    />
+                    <CardText>
+                        <FormCard {...this.props}/>
+                    </CardText>
+                </Card>
+            </div>
+        );
     }
 };
 

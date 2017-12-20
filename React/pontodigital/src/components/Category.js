@@ -13,11 +13,6 @@ const styles = {
     CardTitle:{
     backgroundColor: '#3F51B5',
     },
-    div:{
-        maxWidth:'400px',
-        minWidth:'300px',
-        margin: '0 auto',  
-    },
     backGroundDiv:{
         width: '100%',
         backgroundColor:'red',

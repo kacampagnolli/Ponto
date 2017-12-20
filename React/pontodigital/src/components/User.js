@@ -44,7 +44,7 @@ class SearchUser extends Component
     return(
      
       <form onSubmit={this.search.bind(this)}>
-       <div style={{display:'flex',  justifyContent:'space-between'}}>
+       <div style={{display:'flex', flexFlow:'row wrap', justifyContent:'space-between', alignItems:'center'}}>
       
           <TextField floatingLabelText="Usuário"
                     errorText=""
@@ -84,8 +84,6 @@ class SearchUser extends Component
           <MenuItem value={2} primaryText="Inativo" />
         </SelectField>
         <IconButton
-            iconStyle={styles.mediumIcon}
-            style={styles.medium}
             type="subimit"
         >
             <Search />
@@ -97,14 +95,6 @@ class SearchUser extends Component
 }
 
 const styles = {
-  propContainer: {
-    width: 200,
-    overflow: 'hidden',
-    margin: '20px auto 0',
-  },
-  propToggleHeader: {
-    margin: '20px auto 10px',
-  },
   divTable:{
     maxWidth:800,
   },
@@ -160,7 +150,7 @@ export default class UserBox extends Component{
   render(){
     return(
         <Router history={this.props.history}>
-               <div style={{display:'flex',justifyContent:'center',alignItems:'center',padding:'3%'}}>
+               <div style={{display:'flex',justifyContent:'center',alignItems:'center',height:'100%',padding:'3%'}}>
                 <Route exact path={"/ponto/configuracoes/usuarios"} component={User}/>
                 <Route exact path={"/ponto/configuracoes/usuarios/usuario"} component={Stepper}/>
               </div>
