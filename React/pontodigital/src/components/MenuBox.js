@@ -23,7 +23,7 @@ import Subheader from 'material-ui/Subheader';
 import {List, ListItem, makeSelectable} from 'material-ui/List';
 import PropTypes from 'prop-types';
 import Logo from 'statics/img/logo_autbank.jpg';
-import Circulo from 'statics/img/circulo.png'
+
 import Hexagon from 'statics/img/hexagon.png'
 import TextField from 'material-ui/TextField';
 import Badge from 'material-ui/Badge';
@@ -584,7 +584,6 @@ class  ActionMenuBase extends Component{
         <Drawer open={this.state.DrawerActionMenuBase}
         containerStyle={styles.DrawerActionMenuBase}>
         {/* Arrumar imgs*/}
-            <img style={{ position: 'fixed', width: 440, height: 420, marginLeft : -70, marginTop : -10 }}src={Circulo}  alt="Circulo"/>
           <IconButton style={styles.IconButtonOpenCloseDrawerActionMenuBase} onClick={this.openCloseDrawerActionMenuBase.bind(this)}>
             <CodeIcon />
           </IconButton>
