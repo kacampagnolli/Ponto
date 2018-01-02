@@ -5,7 +5,7 @@ import {BrowserRouter,Switch,Route} from 'react-router-dom'
 import {
   indigo500, 
   indigoA100,
-  grey800,
+  grey400,
   red500,
   grey200
 } from 'material-ui/styles/colors';
@@ -21,7 +21,7 @@ import PontoBox from './components/PontoBox.js'
 
 const muiTheme = getMuiTheme({
     palette: {
-      primary1Color: indigo500,
+      primary1Color: grey400,
       primary2Color:indigoA100,      
     
     },
@@ -30,7 +30,7 @@ const muiTheme = getMuiTheme({
     },
     textField: {
       errorColor: red500,
-      textColor: grey800,
+      textColor: grey400,
     },
     raisedButton:{
       color:grey200,   
