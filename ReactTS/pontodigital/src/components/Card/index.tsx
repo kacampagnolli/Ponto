@@ -7,7 +7,7 @@ import { CardType } from '../../types';
 interface Props {
     cardTitle?: CardType;
     cardText?: CardType;
-    cardActions?: JSX.Element;
+    cardActions?: CardType;
     cardHeader?: CardType;
 }
 
@@ -20,6 +20,7 @@ const CardComponent: React.SFC<Props> = (props) => {
                     cardHeader &&
                     <CardHeader 
                         style={{backgroundColor: Theme.palette.primary1Color}}
+                        textStyle={cardHeader.textStyles}
                     > 
                         {cardHeader.element} 
                     </CardHeader>
@@ -41,7 +42,7 @@ const CardComponent: React.SFC<Props> = (props) => {
                 }
                 {
                     cardActions &&
-                    <CardActions> cardActions </CardActions>
+                    <CardActions style={cardActions.styles}> {cardActions.element} </CardActions>
                 }
             </Card>
         </div>

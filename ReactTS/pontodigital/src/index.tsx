@@ -7,10 +7,11 @@ import { useStrict } from 'mobx';
 import Theme from './theme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import createMobxStores from './main/createMobxStore';
 
 useStrict(true);
 
-const stores = '';
+const stores = createMobxStores();
 const routes = createRoutes();
 const mainTheme = getMuiTheme(Theme);
 

@@ -5,4 +5,7 @@ export default {
     textColor: '#000000',
     
   },
+  textField: {
+    focusColor: '#000000',
+  },
 };
