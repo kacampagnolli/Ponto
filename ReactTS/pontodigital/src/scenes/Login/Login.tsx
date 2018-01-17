@@ -7,17 +7,23 @@ import InputText from '../../components/InputText';
 import RaisedButton from '../../components/RaisedButton';
 
 // Statics
-import logo from '../../statics/img/logo_autbank.jpg';
+import logo from '../../assets/img/logo_autbank.jpg';
 
 // Types
 import { CardType } from '../../types';
 import { Stores } from '../../types';
 
 // Store
-import LoginStore from '../../stores/LoginStore';
+import LoginStore, { Status } from '../../stores/LoginStore';
 
 // Mobx
 import { observer, inject } from 'mobx-react';
+
+//Form Store
+import LoginForm from './LoginForm';
+//Action
+//import { execute } from './Action';
+
 
 interface Props {
   store?: LoginStore;
@@ -26,7 +32,8 @@ interface Props {
 @inject((stores: Stores): Props => ({store: stores.loginStore}))
 @observer
 export default class Login extends React.Component<Props, {}> {
-    
+    private form = new LoginForm();  
+
     renderCardTitle(): CardType {
       return({
         title: 'Login',
@@ -41,9 +48,14 @@ export default class Login extends React.Component<Props, {}> {
       });
     }
     
+    onSubmitForm = () => {
+      console.log('submitted');
+    } 
+
     usernameChange = (e: React.FormEvent<any>): void => {
       const target = e.target as HTMLInputElement;
       this.props.store!.onchangeUsername(target.value);
+      console.log(this.props.store!.username);
     }
 
     passwordChange= (e: React.FormEvent<any>): void => {
@@ -52,26 +64,30 @@ export default class Login extends React.Component<Props, {}> {
     }
 
     renderCardText(): CardType {
-      const {store} = this.props;
+      const { form, onFieldChange } = this.form;
       return({
         element: (
           <div>
             <InputText 
-              floatingLabelText={'Usuário'} 
-              value={store!.username} 
+              floatingLabelText={form.fields.username.label} 
+              value={form.fields.username.value} 
+              hintText={form.fields.username.placeholder}
+              errorText={form.fields.username.error}
               name={'username'} 
               id={'username'} 
               type={'text'} 
-              onChange={this.usernameChange.bind(event)}
+              onChange={onFieldChange.bind(event)}
               fullWidth={true}
             />
             <InputText 
-              floatingLabelText={'Senha'} 
-              value={store!.password} 
+              floatingLabelText={form.fields.password.label} 
+              value={form.fields.password.value}
+              hintText={form.fields.password.placeholder}
+              errorText={form.fields.password.error} 
               name={'password'} 
               id={'password'} 
               type={'password'} 
-              onChange={this.passwordChange.bind(event)}
+              onChange={onFieldChange.bind(event)}
               fullWidth={true}
             />
             <a style={{textDecoration: 'none'}} href="#">Esqueceu sua Senha?</a> 
@@ -84,13 +100,15 @@ export default class Login extends React.Component<Props, {}> {
     }
 
     onPress(): void {
-      this.props.store!.setLoading();
+      //bar;
+      //this.props.store!.setLoading();
     }
 
     renderCardAction(): CardType {
-      return({ element: ( !this.props.store!.loading ?
-        <RaisedButton label={'Login'} onClick={() => this.onPress()} primary={true} />
-        : <RaisedButton loading={true} />
+      const { form } = this.form;
+      return({ element: ( this.props.store!.status === Status.Loading ?
+        <RaisedButton loading={true} />
+        : <RaisedButton label={'Login'} type={'submit'} primary={true} disabled={!form.meta.isValid} />
        ),
       styles: { display: 'flex', flexDirection: 'row-reverse'}
       });
@@ -100,9 +118,10 @@ export default class Login extends React.Component<Props, {}> {
       return (
           <Card 
             cardTitle={this.renderCardTitle()} 
-            cardHeader={this.renderCardHeader()} 
+            cardHeader={this.renderCardHeader()}
             cardText={this.renderCardText()}
             cardActions={this.renderCardAction()}
+            onSubmitForm={this.onSubmitForm}
           />
       );
     }

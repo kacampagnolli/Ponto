@@ -13,6 +13,7 @@ interface Props {
     style?: React.CSSProperties;
     children?: JSX.Element;
     loading?: boolean;
+    type?: string;
     onClick?(): void;
 
 }
@@ -29,6 +30,7 @@ const RaisedButtonComponent: React.SFC<Props> = (props) => {
         style,
         children,
         loading,
+        type,
         onClick
     } = props;
     return (
@@ -42,6 +44,7 @@ const RaisedButtonComponent: React.SFC<Props> = (props) => {
             primary={primary}
             secondary={secondary}
             style={style}
+            type={type}
         >
         
             {loading ? <CircularProgress size={30} style={{padding: 2 }}/> : children} 

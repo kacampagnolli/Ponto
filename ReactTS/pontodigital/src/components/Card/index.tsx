@@ -9,10 +9,11 @@ interface Props {
     cardText?: CardType;
     cardActions?: CardType;
     cardHeader?: CardType;
+    onSubmitForm?: () => void;
 }
 
 const CardComponent: React.SFC<Props> = (props) => {
-    const { cardTitle, cardText, cardActions, cardHeader } = props;
+    const { cardTitle, cardText, cardActions, cardHeader, onSubmitForm } = props;
     return(
         <div style={styles.div}>
             <Card >
@@ -36,6 +37,7 @@ const CardComponent: React.SFC<Props> = (props) => {
                         {cardTitle.element} 
                     </CardTitle>
                 }
+                <form onSubmit={onSubmitForm }> 
                 {
                     cardText &&
                     <CardText> {cardText.element} </CardText>
@@ -44,6 +46,7 @@ const CardComponent: React.SFC<Props> = (props) => {
                     cardActions &&
                     <CardActions style={cardActions.styles}> {cardActions.element} </CardActions>
                 }
+                </form>
             </Card>
         </div>
     );

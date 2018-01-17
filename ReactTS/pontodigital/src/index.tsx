@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import createRoutes from './main/createRoutes';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 import { useStrict } from 'mobx';
 import Theme from './theme';
@@ -18,9 +18,9 @@ const mainTheme = getMuiTheme(Theme);
 ReactDOM.render(
   <Provider {...stores}>
     <MuiThemeProvider muiTheme={mainTheme}>
-      <BrowserRouter>
+      <Router>
         {routes}
-      </BrowserRouter>
+      </Router>
     </MuiThemeProvider >
   </Provider>,
   document.getElementById('root') as HTMLElement
