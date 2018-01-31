@@ -7,7 +7,7 @@ export enum Status {
     Error = 'Error',
 }
 
-export default class LoginStore {
+export default class Authenticate {
     @observable _username: string = '';
     @observable _password: string = '';
     @observable _status: Status = Status.None;
