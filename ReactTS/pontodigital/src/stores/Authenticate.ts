@@ -1,4 +1,4 @@
-import * as qs from 'qs';
+commitimport * as qs from 'qs';
 import { observable, action, computed } from 'mobx';
 
 export interface Response  {
