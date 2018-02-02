@@ -9,7 +9,7 @@ interface Props {
     cardText?: CardType;
     cardActions?: CardType;
     cardHeader?: CardType;
-    onSubmitForm?: () => void;
+    onSubmitForm?: (e: Event) => void;
 }
 
 const CardComponent: React.SFC<Props> = (props) => {
@@ -37,7 +37,7 @@ const CardComponent: React.SFC<Props> = (props) => {
                         {cardTitle.element} 
                     </CardTitle>
                 }
-                <form onSubmit={onSubmitForm }> 
+                <form onSubmit={onSubmitForm!.bind(event)}> 
                 {
                     cardText &&
                     <CardText> {cardText.element} </CardText>

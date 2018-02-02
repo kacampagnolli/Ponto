@@ -13,23 +13,24 @@ import logo from '../../assets/img/logo_autbank.jpg';
 import { CardType } from '../../types';
 import { Stores } from '../../types';
 
-// Store
-import LoginStore, { Status } from '../../stores/LoginStore';
-
 // Mobx
 import { observer, inject } from 'mobx-react';
 
 //Form Store
 import LoginForm from './LoginForm';
+
+//Store
+import Authenticate from '../../stores/Authenticate';
+
 //Action
 //import { execute } from './Action';
 
 
 interface Props {
-  store?: LoginStore;
+  store?: Authenticate;
 }
 
-@inject((stores: Stores): Props => ({store: stores.loginStore}))
+@inject((stores: Stores): Props => ({store: stores.authenticate}))
 @observer
 export default class Login extends React.Component<Props, {}> {
     private form = new LoginForm();  
@@ -48,20 +49,11 @@ export default class Login extends React.Component<Props, {}> {
       });
     }
     
-    onSubmitForm = () => {
-      console.log('submitted');
+    onSubmitForm = (e: Event) => { 
+      e.preventDefault();
+      const {username , password} = this.form.form.fields;
+      this.props.store!.login(username.value, password.value);
     } 
-
-    usernameChange = (e: React.FormEvent<any>): void => {
-      const target = e.target as HTMLInputElement;
-      this.props.store!.onchangeUsername(target.value);
-      console.log(this.props.store!.username);
-    }
-
-    passwordChange= (e: React.FormEvent<any>): void => {
-      const target = e.target as HTMLInputElement;
-      this.props.store!.onchangePassword(target.value);
-    }
 
     renderCardText(): CardType {
       const { form, onFieldChange } = this.form;
@@ -99,14 +91,9 @@ export default class Login extends React.Component<Props, {}> {
       });
     }
 
-    onPress(): void {
-      //bar;
-      //this.props.store!.setLoading();
-    }
-
     renderCardAction(): CardType {
       const { form } = this.form;
-      return({ element: ( this.props.store!.status === Status.Loading ?
+      return({ element: ( this.props.store!.loading ?
         <RaisedButton loading={true} />
         : <RaisedButton label={'Login'} type={'submit'} primary={true} disabled={!form.meta.isValid} />
        ),

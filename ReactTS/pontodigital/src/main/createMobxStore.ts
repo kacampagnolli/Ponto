@@ -1,8 +1,8 @@
 import { Stores } from '../types';
-import LoginStore from '../stores/LoginStore';
+import Authenticate from '../stores/Authenticate';
 
 export default function createMobxStores(): Stores {
     return {
-        loginStore: new LoginStore(),
+        authenticate: new Authenticate(),
     };
 }

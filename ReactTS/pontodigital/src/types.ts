@@ -1,4 +1,4 @@
-import LoginStore from './stores/LoginStore';
+import Authenticate from './stores/Authenticate';
 
 export type ExperimentName = 'app1';
 
@@ -19,5 +19,5 @@ export type CardType = {
 };
 
 export interface Stores {
-    loginStore: LoginStore;
+    authenticate: Authenticate;
 }

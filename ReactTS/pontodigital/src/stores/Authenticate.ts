@@ -1,43 +1,57 @@
+import * as qs from 'qs';
 import { observable, action, computed } from 'mobx';
 
-export enum Status {
-    None = 'None',
-    Loading = 'Loading',
-    Loaded = 'Loaded',
-    Error = 'Error',
+export interface Response  {
+    message: string
+    token: string
+}
+
+export interface Error {
+    location: string
+    param: string
+    msg: string
 }
 
 export default class Authenticate {
-    @observable _username: string = '';
-    @observable _password: string = '';
-    @observable _status: Status = Status.None;
+    @observable isAuthenticate: boolean = false
+    @observable private _loading: boolean;
+    @observable private _token: string;
+    @observable private _error: true;
+    @observable private _errorMesage: Error[] = [];
 
-    constructor(){
-    
-    }
-
-    @action onchangeUsername = (username: string): void => {
-        this._username = username;
-    }
-
-    @action onchangePassword = (password: string): void => {
-        this._password = password;
-    }
-
-    @action changeStatus = (status: Status): void => {
-        this._status = status;
-        
+    @computed
+    get loading() {
+        return this._loading;
     } 
 
-    @computed get username(): string {
-        return this._username;
+    @computed
+    get error() {
+        return this._error;
     }
 
-    @computed get status(): Status {
-        return this._status;
-    }
-
-    @computed get password(): string {
-        return this._password;
+    @action
+    login = (username: string, password: string) => {
+        this._loading = true
+        var body = {nome: username, senha: password};
+        fetch("http://192.168.1.2:3000/public/login", {
+          method: "POST",
+          mode: 'no-cors',
+          body: qs.stringify(body),
+          headers : {
+              'Content-Type' : 'application/x-www-form-urlencoded'
+          }
+        }).then(
+            action((response) => {
+                const res = response as Response;
+                this.isAuthenticate = true;
+                this._token = res.token;
+                console.log(res.token);
+            }),
+            action(error => {
+                const err = error as Error[];
+                this._errorMesage = err;
+                this._error = true;
+            })  
+        ).then(action(() => this._loading = false))
     }
 }

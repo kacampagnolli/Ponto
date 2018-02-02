@@ -42,6 +42,8 @@ class LoginForm {
         this.form.fields[target.name].error = validation.errors.first(target.name) as string;
     }
 
+
+
 }
 export default LoginForm;
 
