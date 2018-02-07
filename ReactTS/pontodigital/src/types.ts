@@ -1,4 +1,5 @@
 import Authenticate from './stores/Authenticate';
+import Teste from  './stores/Test';
 
 export type ExperimentName = 'app1';
 
@@ -7,7 +8,8 @@ export const experimentNames: ExperimentName[] = [
 ];
 
 export interface Stores {
-
+    authenticate: Authenticate,
+    teste: Teste,
 }
 
 export type CardType = {

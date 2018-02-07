@@ -1,27 +1,41 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import createRoutes from './main/createRoutes';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Provider } from 'mobx-react';
+import App from './App';
+import { AppContainer } from 'react-hot-loader';
+import { Stores } from './types';
+import {createMuiTheme, MuiThemeProvider } from 'material-ui/styles';
+import { Provider as MobxProvider } from 'mobx-react';
 import { useStrict } from 'mobx';
 import Theme from './theme';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import createMobxStores from './main/createMobxStore';
+import { BrowserRouter as Router } from 'react-router-dom'; 
 
 useStrict(true);
 
-const stores = createMobxStores();
-const routes = createRoutes();
-const mainTheme = getMuiTheme(Theme);
+const stores: Stores = createMobxStores();
+const mainTheme = createMuiTheme(Theme);
 
-ReactDOM.render(
-  <Provider {...stores}>
-    <MuiThemeProvider muiTheme={mainTheme}>
-      <Router>
-        {routes}
-      </Router>
-    </MuiThemeProvider >
-  </Provider>,
-  document.getElementById('root') as HTMLElement
-);
+function render(App: React.ComponentType) {
+  ReactDOM.render(
+    <AppContainer>
+      <MobxProvider {...stores}>
+        <Router basename ={"/"}>
+          <MuiThemeProvider theme={mainTheme}>
+            <App />
+          </MuiThemeProvider >
+        </Router>
+      </MobxProvider>
+    </AppContainer>,
+    document.getElementById('root') as HTMLElement
+  );
+}
+
+render(App)
+
+declare var module: any;
+if (module.hot) {
+    module.hot.accept('./App', () =>{
+      const NextApp = require('./App').default;
+      render(NextApp);
+    });
+}

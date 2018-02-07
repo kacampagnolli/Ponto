@@ -1,4 +1,4 @@
-commitimport * as qs from 'qs';
+import * as qs from 'qs';
 import { observable, action, computed } from 'mobx';
 
 export interface Response  {
@@ -33,25 +33,25 @@ export default class Authenticate {
     login = (username: string, password: string) => {
         this._loading = true
         var body = {nome: username, senha: password};
-        fetch("http://192.168.1.2:3000/public/login", {
+       return fetch("http://192.168.1.2:3000/public/login", {
           method: "POST",
-          mode: 'no-cors',
+          mode: 'cors',
           body: qs.stringify(body),
           headers : {
               'Content-Type' : 'application/x-www-form-urlencoded'
           }
-        }).then(
-            action((response) => {
-                const res = response as Response;
-                this.isAuthenticate = true;
-                this._token = res.token;
-                console.log(res.token);
-            }),
-            action(error => {
-                const err = error as Error[];
-                this._errorMesage = err;
-                this._error = true;
-            })  
-        ).then(action(() => this._loading = false))
+        })
+        .then((response) => response.json())
+        .then(action((res: Response) => {
+            this.isAuthenticate = true;
+            this._token = res.token;
+            this._loading = false;
+            console.log(res.token);
+        })).catch(action(error => {
+            const err = error as Error[];
+            this._errorMesage = err;
+            this._error = true;
+            this._loading = false;
+        }));
     }
 }
