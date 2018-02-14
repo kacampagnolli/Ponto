@@ -1,9 +1,69 @@
 var logger = require('../servicos/logger.js');
+var jwt = require('jsonwebtoken');
+var cfg = require("../config/config");
+var auth = require('../config/auth.js')();
+var _ = require("lodash");
 
 module.exports = function(app){
 
-app.get('/usuarios',function(req, res){
-   
+app.post("/public/login", function(req, res) {
+    
+    req.assert("nome","Nome de usuário inválido").notEmpty();
+    req.assert("senha","Senha inválida").notEmpty();
+    
+    var erros = req.validationErrors();
+    
+    if(erros){
+        console.log('Erro(s) de validação encontrado(s)');
+        res.status(400).send(erros);
+        return;
+    }
+    
+    var nome = req.body.nome;
+    var senha = req.body.senha;
+    
+
+    var connection = app.persistencia.connectionFactory();
+    var usuarioDao = new app.persistencia.UsuarioDao(connection);
+
+    usuarioDao.authenticate(nome, senha, function(erro,resultado) {
+        if(erro){
+            res.status(500).send(erro);
+            logger.info("Error: " + erro);
+        }else{
+            if (!_.isEmpty(resultado)) {
+                var payload = {id: _.first(resultado).ID};
+                
+                var token = jwt.sign(payload, cfg.jwtSecret, {
+                    expiresIn: 43200
+                });
+
+                //console.log(res.json({message: 'ok' , token: 'Bearer ' + token}))
+                res.json({message: 'ok' , token: 'Bearer ' + token});
+            }else {
+                res.sendStatus(401);
+            }
+        }
+    });
+});
+
+app.get("/protected/usuario", auth.authenticate(), function(req, res) { 
+    var id = req.user; 
+    var connection = app.persistencia.connectionFactory();
+    var usuarioDao = new app.persistencia.UsuarioDao(connection);    
+    usuarioDao.findById(id,function(erro,resultado){
+        if(erro){
+            res.status(500).send(erro);
+            logger.info("Error: " + erro);
+            return;
+        }
+        res.json(resultado);
+        return;
+    });
+});
+
+
+app.get('/usuarios',function(req, res){   
     var connection = app.persistencia.connectionFactory();
     var usuarioDao = new app.persistencia.UsuarioDao(connection);
     usuarioDao.lista(function(erro,resultado){
@@ -70,6 +130,11 @@ app.delete('/usuarios/usuario/:id', function(req, res){
 
 
 });
+
+
+
+
+
 
 app.post('/usuarios/usuario',function(req, res){
 
