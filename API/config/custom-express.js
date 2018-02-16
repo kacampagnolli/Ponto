@@ -4,6 +4,9 @@ var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
 var morgan = require('morgan');
 var logger = require('../servicos/logger.js');
+var auth = require('./auth.js')();
+var jwt = require('jsonwebtoken');
+var cors = require('cors')
 
 module.exports = function(){
     var app = express();
@@ -15,11 +18,11 @@ module.exports = function(){
             }
         }
     }));
-
-    app.use(bodyParser.urlencoded({extend: true}));
+    app.use(cors())
+    app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
     app.use(expressValidator());
-
+    app.use(auth.initialize());
 
     consign()
         .include('controllers')

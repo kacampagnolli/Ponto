@@ -4,8 +4,8 @@ function createDBConnection(){
     return mysql.createConnection({
         host: 'localhost',
         user: 'root',
-        password: 'root',
-        database: 'ponto'
+        password: 'q1w2e3r4',
+        database: 'Ponto'
     });
 }
 
