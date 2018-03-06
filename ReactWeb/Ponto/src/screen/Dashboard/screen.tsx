@@ -5,6 +5,8 @@ import Button from 'material-ui/Button';
 import { Authentication } from '../../modules/Authentication';
 import { History } from 'history';
 
+import { Menu } from '../../components/Menu';
+
 export type DashboardProps = {
     authentication: Authentication;
     history: History
@@ -31,6 +33,7 @@ export class Dashboard extends React.Component<DashboardProps>{
     render() {
         return (
             <div>
+                <Menu />
                 <h1>Dashboard</h1>
                 <Button variant="raised" color="primary" onClick={this.reset}>
                     Logout
