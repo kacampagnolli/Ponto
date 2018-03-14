@@ -1,18 +1,17 @@
+// Libraries
 import * as React from "react";
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
-
 import { observer, inject } from 'mobx-react';
+import { RouteProps } from 'react-router';
 
+// Components
 import { Login } from './screen/Login';
 import { Dashboard } from './screen/Dashboard';
-
 import { Authentication } from './modules/Authentication';
 
-import { RouteProps } from 'react-router';
 
 interface AppProps { 
     authentication: Authentication; 
-
 }
 
 interface ProtectedRouteProps {
@@ -31,8 +30,6 @@ function ProtectedRoute({authentication, component: Component, render, path, ...
             }} />
         }
         if (Component) {
-            console.log("teste");
-            console.log(props);
             return <Component {...props} />
         } 
     } : undefined;
@@ -42,14 +39,11 @@ function ProtectedRoute({authentication, component: Component, render, path, ...
     )
 }
 
-// 'HelloProps' describes the shape of props.
-// State is never set so we use the '{}' type.
 @inject('authentication')
 @observer
-export class App extends React.Component<AppProps> {
+class AppComponent extends React.Component<AppProps> {
     render() {
         const { authentication } = this.props;
-        console.log("aqui");
         return (
             <Switch>
                 <Route path="/login" component={Login} />
@@ -58,5 +52,6 @@ export class App extends React.Component<AppProps> {
         )
     }
 }
+const App = withRouter(AppComponent as any) 
 
-export default withRouter(App as any) as React.ComponentType<{}>;
+export {App}

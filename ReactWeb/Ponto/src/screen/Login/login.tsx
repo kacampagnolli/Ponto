@@ -1,18 +1,17 @@
+// Libraries
 import * as React from 'react';
-
-import { Authentication } from '../../modules/Authentication';
-
 import { RouteComponentProps, Redirect } from 'react-router';
+import { Authentication } from '../../modules/Authentication';
+import { observer, inject } from 'mobx-react';
+import { isEmpty } from 'lodash';
 
+// Component
 import LoginForm from './form';
-
-import Input, { InputLabel } from 'material-ui/Input';
-import { FormControl, FormHelperText } from 'material-ui/Form';
 import Button from 'material-ui/Button';
 
-import { observer, inject } from 'mobx-react';
-
-import { isEmpty } from 'lodash';
+// Material-ui
+import Input, { InputLabel } from 'material-ui/Input';
+import { FormControl, FormHelperText } from 'material-ui/Form';
 
 type LoginProps = {
     authentication: Authentication;
@@ -22,7 +21,7 @@ type LoginProps = {
 
 @inject('authentication')
 @observer
-export class Login extends React.Component<LoginProps>{
+class Login extends React.Component<LoginProps>{
 
     private form = new LoginForm();  
 
@@ -35,13 +34,12 @@ export class Login extends React.Component<LoginProps>{
         }).then(() => {
             this.props.redirect();
         }).catch(() => {
-            console.log("sou homem");
+            console.log("sou homem"); // TODO @leobronza Arrumar
         })
       } 
 
     renderForm() {
         const { form, onFieldChange } = this.form;
-        console.log("teste");
         return(
             <form onSubmit={this.onSubmitForm.bind(event)}>
                 <FormControl error={!isEmpty(form.fields.username.error)} fullWidth aria-describedby="name-error-text">
@@ -66,7 +64,6 @@ export class Login extends React.Component<LoginProps>{
         const { from } = this.props.location.state || { from: { pathname: '/' } };
        
         if(isLoggedIn) {
-            console.log(from);
             return <Redirect to={from} />
         }
         return (
@@ -77,3 +74,4 @@ export class Login extends React.Component<LoginProps>{
         );
     }
 }
+export {Login} 

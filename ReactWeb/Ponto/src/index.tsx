@@ -1,16 +1,18 @@
+// Libraries
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { AppContainer } from 'react-hot-loader';
 import { Provider as MobxProvider } from 'mobx-react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import { useStrict } from 'mobx';
+import { App }  from "./app";
 
+// Components 
 import { Authentication } from './modules/Authentication';
 
-import App  from "./App";
+// Material-ui
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
-useStrict(true);
 
 const modulesToProvider = {
     authentication: new Authentication(),
@@ -31,15 +33,16 @@ const render = (App: any) => {
       </AppContainer>,
       document.getElementById('root'),
     )
-  }
-  
-  render(App)
-  
-  declare var module: any;
-  // Webpack Hot Module Replacement API
-  if (module.hot) {
-    module.hot.accept('./App', () => {
-        const NextApp = require('./App').default;
-        render(NextApp);
+}
+
+
+declare var module: any;
+// Webpack Hot Module Replacement API
+if (module.hot) {
+    module.hot.accept('./app', () => {
+    const NextApp = require('./app').default;
+    render(NextApp);
     })
-  }
+}
+useStrict(true);
+render(App)
