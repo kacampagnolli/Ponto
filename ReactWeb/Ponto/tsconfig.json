@@ -8,14 +8,15 @@
     "allowJs": true,
     "jsx": "react",
     "moduleResolution": "node",
-    "forceConsistentCasingInFileNames": true,
+  
     //"noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "esModuleInterop": true
   },
   "exclude": [
     "node_modules",
@@ -27,5 +28,6 @@
   ],
   "include": [
     "./src/**/*"
-]
+  ]
+
 }

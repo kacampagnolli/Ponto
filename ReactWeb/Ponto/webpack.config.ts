@@ -1,7 +1,30 @@
-import * as webpack from 'webpack';
-import * as path from 'path';
+import webpack from 'webpack';
+import path from 'path';
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+let plugins = [];
+
+// TODO @leobronza lazy loading
+
+plugins.push(new HtmlWebpackPlugin({
+  template: './src/assets/index.html',
+  favicon: './src/assets/favicon.ico'
+}))
+
+let SERVICE_URL = JSON.stringify('http://140.6.254.53:3000/')
+
+if(process.env.NODE_ENV == 'production'){
+  plugins.push(new webpack.optimize.ModuleConcatenationPlugin())
+  SERVICE_URL = JSON.stringify('http://TODOURLPRODUCTION:3000/')
+}else{
+  plugins.push(new webpack.HotModuleReplacementPlugin())
+  plugins.push(new webpack.NamedModulesPlugin())
+}
+
+plugins.push(new webpack.DefinePlugin({
+  SERVICE_URL: SERVICE_URL
+}))
 
 export default function(args: any): webpack.Configuration {
   return {
@@ -29,15 +52,7 @@ export default function(args: any): webpack.Configuration {
         '.tsx'
       ]
     },
-    plugins: [
-      new webpack.NamedModulesPlugin(),
-      new webpack.HotModuleReplacementPlugin(),
-      new HtmlWebpackPlugin({
-          template: './src/assets/index.html',
-          favicon: './src/assets/favicon.ico'
-          
-      }),
-    ],
+    plugins:plugins,
     module: {
       rules: [  
         {

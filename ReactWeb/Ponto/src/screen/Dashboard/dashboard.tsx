@@ -50,7 +50,7 @@ class DashboardComponent extends React.Component<DashboardProps>{
                 <Switch>
                     <Route path="/resumo" exact component={Resume} />
                     <Route path="/estatisticas" exact component={Statistics} />
-                    <Route path="/usuarios" exact component={Users} />
+                    <Route path="/usuarios" component={Users} />
                     <Route path="/categorias" exact component={Categories} />
                     <Route path="/equipes" exact component={Teams}/>
                 </Switch>

@@ -80,7 +80,7 @@ class Authentication {
             let authentication: AuthenticationParams;
             try {
                 const auth: AuthenticationResult = await fetchAuthentication(authenticationPayload);
-                console.log(auth)
+                console.log(auth.accessToken)
                 authentication = {
                     accessToken: auth.accessToken,
                 }
