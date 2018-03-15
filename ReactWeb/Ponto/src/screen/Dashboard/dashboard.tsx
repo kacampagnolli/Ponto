@@ -15,7 +15,7 @@ import { Users } from '../../screen/Users';
 import { Resume } from '../../screen/Resume';
 import { Categories } from '../../screen/Categories';
 import { Teams } from '../../screen/Teams';
-
+import { NotFound } from '../../components/404'
 // Material-ui
 import Button from 'material-ui/Button';
 
@@ -57,6 +57,7 @@ class DashboardComponent extends React.Component<DashboardProps>{
                     <Route path="/usuarios" component={Users} />
                     <Route path="/categorias" component={Categories} />
                     <Route path="/equipes"  component={Teams}/>
+                    <Route component={NotFound} />
                 </Switch>
                 
                 

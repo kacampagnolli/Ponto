@@ -5,7 +5,6 @@ class TopMenu extends React.PureComponent{
     render() {
         return (
             <div>
-                TopMenu
             </div>
         );
     }

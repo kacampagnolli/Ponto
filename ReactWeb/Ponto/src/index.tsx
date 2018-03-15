@@ -18,7 +18,9 @@ const modulesToProvider = {
     authentication: new Authentication(),
 }
 
-const theme = createMuiTheme();
+const theme = createMuiTheme({
+    // TODO @leobronza thema
+});
 
 const render = (App: any) => {
     ReactDOM.render(
