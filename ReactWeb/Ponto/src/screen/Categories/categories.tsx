@@ -1,15 +1,31 @@
 // Libraries
 import * as React from 'react';
+import { withRouter, Switch, Route, RouteComponentProps} from 'react-router';
 
-class Categories extends React.PureComponent{
+// Component 
+import { Maneger } from './maneger'
+import { List } from './list'
+
+type UserComponentProps = {
+    
+} & RouteComponentProps<{}>;
+
+class CategoriesComponent extends React.Component<UserComponentProps>{
     render() {
+        const { match } = this.props;
         return (
             <div>
-                Categorias
+                <Switch>
+                    <Route path={`${match.url}`} exact component={List}/> 
+                    <Route path={`${match.url}/cadastrar`} exact component={Maneger} />
+                    <Route path={`${match.url}/:id`} exact component={Maneger} />
+                </Switch>
+
             </div>
         );
     }
 } 
 
-export {Categories}
+const Categories = withRouter(CategoriesComponent as any)
 
+export {Categories}

@@ -12,7 +12,7 @@ plugins.push(new HtmlWebpackPlugin({
   favicon: './src/assets/favicon.ico'
 }))
 
-let SERVICE_URL = JSON.stringify('http://140.6.254.53:3000/')
+let SERVICE_URL = JSON.stringify('http://192.168.1.3:3000/')
 
 if(process.env.NODE_ENV == 'production'){
   plugins.push(new webpack.optimize.ModuleConcatenationPlugin())

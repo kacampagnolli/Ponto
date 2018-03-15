@@ -1,15 +1,14 @@
 // Libraries
 import * as React from 'react';
 
-class Register extends React.PureComponent{
+class List extends React.PureComponent{
     render() {
         return (
             <div>
-                Cadastro
+                Listagem Categorias
             </div>
         );
     }
 } 
 
-export {Register}
-
+export {List}
