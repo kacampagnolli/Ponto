@@ -7,8 +7,7 @@ import { Link } from 'react-router-dom'
 
 // Components
 import { http } from '../../util';
-import { LeftMenu } from '../../components/leftmenu';
-import { TopMenu } from '../../components/topmenu';
+import { Menu } from '../../components/Menu';
 import { Authentication } from '../../modules/Authentication';
 import { Statistics } from '../../screen/Statistics';
 import { Users } from '../../screen/Users';
@@ -46,51 +45,50 @@ class DashboardComponent extends React.Component<DashboardProps>{
         const id = 1
         return (
             <div>
-                <TopMenu/>
-                <LeftMenu/>
-
-                <h1>Dashboard</h1>
-                
-                <Switch>    
-                    <Route path="/resumo" exact component={Resume} />
-                    <Route path="/estatisticas" exact component={Statistics} />
-                    <Route path="/usuarios" component={Users} />
-                    <Route path="/categorias" component={Categories} />
-                    <Route path="/equipes"  component={Teams}/>
-                    <Route component={NotFound} />
-                </Switch>
-                
-                
-                <Link to ="/usuarios">Listar usuario</Link>
-                <br/>
-                <Link to ="/usuarios/cadastrar">cadastrar usuario</Link>
-                <br/>
-                <Link to={`/usuarios/${id}`}>editar usuario 1</Link>
+                <Menu>
+                    <h1>Dashboard</h1>
                     
-                <br/>
-                <br/>
+                    <Switch>    
+                        <Route path="/resumo" exact component={Resume} />
+                        <Route path="/estatisticas" exact component={Statistics} />
+                        <Route path="/usuarios" component={Users} />
+                        <Route path="/categorias" component={Categories} />
+                        <Route path="/equipes"  component={Teams}/>
+                        <Route component={NotFound} />
+                    </Switch>
+                    
+                    
+                    <Link to ="/usuarios">Listar usuario</Link>
+                    <br/>
+                    <Link to ="/usuarios/cadastrar">cadastrar usuario</Link>
+                    <br/>
+                    <Link to={`/usuarios/${id}`}>editar usuario 1</Link>
+                        
+                    <br/>
+                    <br/>
 
-                <Link to="/equipes">Listar Times</Link>
-                <br/>
-                <Link to="/equipes/cadastrar">Cadastrar Time</Link>
-                <br/>
-                <Link to={`/equipes/${id}`}>editar Time 1</Link>
+                    <Link to="/equipes">Listar Times</Link>
+                    <br/>
+                    <Link to="/equipes/cadastrar">Cadastrar Time</Link>
+                    <br/>
+                    <Link to={`/equipes/${id}`}>editar Time 1</Link>
 
-                <br/>
-                <br/>
+                    <br/>
+                    <br/>
 
-                <Link to="/categorias">Listar categorias</Link>
-                <br/>
-                <Link to="/categorias/cadastrar">Cadastrar categoria</Link>
-                <br/>
-                <Link to={`/categorias/${id}`}>editar categoria 1</Link>
+                    <Link to="/categorias">Listar categorias</Link>
+                    <br/>
+                    <Link to="/categorias/cadastrar">Cadastrar categoria</Link>
+                    <br/>
+                    <Link to={`/categorias/${id}`}>editar categoria 1</Link>
 
-                <br/>
-                <br/>
-                
-                <Button variant="raised" color="primary" onClick={this.reset}>
-                    Logout
-                </Button>
+                    <br/>
+                    <br/>
+                    
+                    <Button variant="raised" color="primary" onClick={this.reset}>
+                        Logout
+                    </Button>
+                </Menu>
             </div>
         );
     }
