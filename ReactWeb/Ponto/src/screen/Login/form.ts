@@ -1,5 +1,5 @@
 import { observable, action } from 'mobx'
-import Validator from 'validatorjs'
+import Validator from 'validatorjs';
 
 class LoginForm {
     @observable

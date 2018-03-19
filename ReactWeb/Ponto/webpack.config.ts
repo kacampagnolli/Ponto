@@ -1,11 +1,9 @@
-import webpack from 'webpack';
-import path from 'path';
+const webpack= require('webpack');
+const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 let plugins = [];
-
-// TODO @leobronza lazy loading
 
 plugins.push(new HtmlWebpackPlugin({
   template: './src/assets/index.html',
@@ -26,8 +24,7 @@ plugins.push(new webpack.DefinePlugin({
   SERVICE_URL: SERVICE_URL
 }))
 
-export default function(args: any): webpack.Configuration {
-  return {
+module.exports = {
     entry: {
       index: [
           "react-hot-loader/patch",
@@ -35,7 +32,8 @@ export default function(args: any): webpack.Configuration {
       ]
     },
     output: {
-      filename: "bundle.js",
+      filename: "[name].bundle.js",
+      chunkFilename: "[name].chunk.js",
       path: path.resolve(__dirname, "dist"),
       sourceMapFilename: "bundle.js.map"
     },
@@ -72,5 +70,4 @@ export default function(args: any): webpack.Configuration {
         }
       ]
     }
-  };  
 }

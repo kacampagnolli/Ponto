@@ -1,6 +1,6 @@
 // Libraries
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import React from "react";
+import ReactDOM from "react-dom";
 import { AppContainer } from 'react-hot-loader';
 import { Provider as MobxProvider } from 'mobx-react';
 import { BrowserRouter as Router } from 'react-router-dom';

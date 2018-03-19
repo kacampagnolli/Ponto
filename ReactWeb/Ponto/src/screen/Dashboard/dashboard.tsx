@@ -13,8 +13,9 @@ import { Statistics } from '../../screen/Statistics';
 import { Users } from '../../screen/Users';
 import { Resume } from '../../screen/Resume';
 import { Categories } from '../../screen/Categories';
-import { Teams } from '../../screen/Teams';
 import { NotFound } from '../../components/404'
+import { AsyncComponent } from '../../components/asyncComponent';
+
 // Material-ui
 import Button from 'material-ui/Button';
 
@@ -29,7 +30,7 @@ class DashboardComponent extends React.Component<DashboardProps>{
 
     testeToken= async () => {
        const usuario = await http.get('/protected/usuario')
-       console.log(usuario)
+       console.log("usuario:" + usuario)
     }
 
     componentWillMount(){
@@ -43,6 +44,20 @@ class DashboardComponent extends React.Component<DashboardProps>{
     
     render() {
         const id = 1
+
+         const teams = async () =>{
+           const obj = await  import('../../screen/Teams');
+           return obj.Teams
+         } 
+         const users = async () =>{
+            const obj = await  import('../../screen/Users');
+            return obj.Users
+          } 
+          const categories = async () =>{
+            const obj = await  import('../../screen/Categories');
+            return obj.Categories
+          } 
+
         return (
             <div>
                 <Menu>
@@ -51,9 +66,12 @@ class DashboardComponent extends React.Component<DashboardProps>{
                     <Switch>    
                         <Route path="/resumo" exact component={Resume} />
                         <Route path="/estatisticas" exact component={Statistics} />
-                        <Route path="/usuarios" component={Users} />
-                        <Route path="/categorias" component={Categories} />
-                        <Route path="/equipes"  component={Teams}/>
+                        <Route path="/usuarios" component={ () => 
+                                    <AsyncComponent moduleProvider={users}/>}/>
+                        <Route path="/categorias" component={() =>  
+                                    <AsyncComponent moduleProvider={categories}/>} />
+                        <Route path="/equipes"  component={() => 
+                                    <AsyncComponent moduleProvider={teams}/>} />
                         <Route component={NotFound} />
                     </Switch>
                     
